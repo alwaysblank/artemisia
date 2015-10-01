@@ -19,6 +19,7 @@ var runSequence  = require('run-sequence');
 var sass         = require('gulp-sass');
 var sourcemaps   = require('gulp-sourcemaps');
 var uglify       = require('gulp-uglify');
+var notify       = require('gulp-notify');
 
 // See https://github.com/austinpray/asset-builder
 var manifest = require('asset-builder')('./assets/manifest.json');
@@ -80,7 +81,7 @@ var revManifest = path.dist + 'assets.json';
 var cssTasks = function(filename) {
   return lazypipe()
     .pipe(function() {
-      return gulpif(!enabled.failStyleTask, plumber());
+      return gulpif(!enabled.failStyleTask, plumber({errorHandler: notify.onError("Error: <%= error.message %>")}));
     })
     .pipe(function() {
       return gulpif(enabled.maps, sourcemaps.init());
