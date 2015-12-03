@@ -1,4 +1,8 @@
-### HEAD
+### 8.4.0: December 1st, 2015
+* Update to Bootstrap 3.3.6 ([#1578](https://github.com/roots/sage/pull/1578))
+* Remove unnecessary underscore ([#1577](https://github.com/roots/sage/pull/1577))
+* Drop support for older browsers ([#1571](https://github.com/roots/sage/pull/1571))
+* Add support for theme customizer ([#1573](https://github.com/roots/sage/pull/1573))
 * Remove extraneous no-js ([#1562](https://github.com/roots/sage/pull/1562))
 * Simplify/speed up editor style process ([#1560](https://github.com/roots/sage/pull/1560))
 
