@@ -5,10 +5,10 @@ namespace Roots\Sage\CPT;
 /**
  * Flush rewrite rules
  */
-function flush_rewrite_rules() {
+function do_flush_rewrite_rules() {
 	flush_rewrite_rules();
 }
-add_action( 'after_switch_theme', __NAMESPACE__ . '\\flush_rewrite_rules' );
+add_action( 'after_switch_theme', __NAMESPACE__ . '\\do_flush_rewrite_rules' );
 
 /**
  * The custom type
