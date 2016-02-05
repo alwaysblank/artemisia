@@ -20,6 +20,7 @@ var sass         = require('gulp-sass');
 var sourcemaps   = require('gulp-sourcemaps');
 var uglify       = require('gulp-uglify');
 var notify       = require('gulp-notify');
+var modernizr = require('gulp-modernizr');
 
 // See https://github.com/austinpray/asset-builder
 var manifest = require('asset-builder')('./assets/manifest.json');
@@ -231,6 +232,22 @@ gulp.task('jshint', function() {
     .pipe(gulpif(enabled.failJSHint, jshint.reporter('fail')));
 });
 
+// ### Modernizr build
+gulp.task('modernizr', function() {
+  return gulp.src([path.source + 'scripts/*.js', path.source + 'styles/**/*.scss'])
+    .pipe(modernizr({
+        "options" : [
+        "setClasses",
+        "addTest",
+        "html5printshiv",
+        "testProp",
+        "fnBind"
+        ]
+    }))
+    .pipe(uglify())
+    .pipe(gulp.dest("dist/scripts/"));
+});
+
 // ### Clean
 // `gulp clean` - Deletes the build folder entirely.
 gulp.task('clean', require('del').bind(null, [path.dist]));
@@ -250,8 +267,8 @@ gulp.task('watch', function() {
       blacklist: ['/wp-admin/**']
     }
   });
-  gulp.watch([path.source + 'styles/**/*'], ['styles']);
-  gulp.watch([path.source + 'scripts/**/*'], ['jshint', 'scripts']);
+  gulp.watch([path.source + 'styles/**/*'], ['styles', 'modernizr']);
+  gulp.watch([path.source + 'scripts/**/*'], ['jshint', 'scripts', 'modernizr']);
   gulp.watch([path.source + 'fonts/**/*'], ['fonts']);
   gulp.watch([path.source + 'images/**/*'], ['images']);
   gulp.watch(['bower.json', 'assets/manifest.json'], ['build']);
@@ -263,6 +280,7 @@ gulp.task('watch', function() {
 gulp.task('build', function(callback) {
   runSequence('styles',
               'scripts',
+              'modernizr',
               ['fonts', 'images'],
               callback);
 });
