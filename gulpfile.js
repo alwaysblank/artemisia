@@ -12,7 +12,7 @@ var jshint       = require('gulp-jshint');
 var lazypipe     = require('lazypipe');
 var less         = require('gulp-less');
 var merge        = require('merge-stream');
-var cssnano     = require('gulp-cssnano');
+var cssNano      = require('gulp-cssnano');
 var plumber      = require('gulp-plumber');
 var rev          = require('gulp-rev');
 var runSequence  = require('run-sequence');
@@ -106,7 +106,9 @@ var cssTasks = function(filename) {
         'opera 12'
       ]
     })
-    .pipe(cssnano)
+    .pipe(cssNano, {
+      safe: true
+    })
     .pipe(function() {
       return gulpif(enabled.rev, rev());
     })
