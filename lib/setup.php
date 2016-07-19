@@ -36,6 +36,18 @@ function setup() {
   // http://codex.wordpress.org/Function_Reference/add_image_size
   add_theme_support('post-thumbnails');
 
+  // Add custom image sizes to wysiwyg size selection
+  /*
+  add_image_size( 'image-size', 1920, 1080, true  );
+
+  function my_custom_sizes( $sizes ) {
+    return array_merge( $sizes, array(
+      "image-size" => __( "Image Size"),
+    ) );
+  } 
+  add_filter( 'image_size_names_choose', __NAMESPACE__ . '\\my_custom_sizes' ); 
+  */
+
   // Enable post formats
   // http://codex.wordpress.org/Post_Formats
   add_theme_support('post-formats', ['aside', 'gallery', 'link', 'image', 'quote', 'video', 'audio']);
