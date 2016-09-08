@@ -5,30 +5,16 @@
 
 Sage is a WordPress starter theme with a modern development workflow.
 
-Write stylesheets with Sass, automatically check your JavaScript for errors, optimize images, enable synchronized browser testing, and more.
-
 ## Features
 
-* [Webpack](https://webpack.github.io/) is used as a build tool for compiling stylesheets, checking for JavaScript errors, optimizing images, and concatenating and minifying files
-* [BrowserSync](http://www.browsersync.io/) for keeping multiple browsers and devices synchronized while testing, along with injecting updated CSS and JS into your browser while you're developing
-* [Bootstrap](http://getbootstrap.com/)
+* Sass for stylesheets
+* ES6 for JavaScript
+* [Webpack](https://webpack.github.io/) for compiling assets, optimizing images, and concatenating and minifying files
+* [BrowserSync](http://www.browsersync.io/) for synchronized browser testing
+* [Bootstrap 4](http://getbootstrap.com/) for a front-end framework (can be removed or replaced)
 * Template inheritance with the [theme wrapper](https://roots.io/sage/docs/theme-wrapper/)
-* ARIA roles and microformats
-* Posts use the [hNews](http://microformats.org/wiki/hnews) microformat
-* [Multilingual ready](https://roots.io/wpml/) and over 30 available [community translations](https://github.com/roots/sage-translations)
 
-Install the [Soil](https://roots.io/plugins/soil/) plugin to enable additional recommended features:
-
-* Load jQuery from the jQuery CDN
-* Cleaner WordPress markup
-* Cleaner HTML output of navigation menus
-* Root relative URLs
-* Nice search
-* Google Analytics snippet from [HTML5 Boilerplate](http://html5boilerplate.com/)
-* Move all JS to the footer
-* Disable trackbacks and pingbacks
-
-See a complete working example in the [roots-example-project.com repo](https://github.com/roots/roots-example-project.com).
+See a working example at [roots-example-project.com](https://roots-example-project.com/).
 
 ## Requirements
 
@@ -36,55 +22,52 @@ Make sure all dependencies have been installed before moving on:
 
 * [PHP](http://php.net/manual/en/install.php) >= 5.5.x
 * [Composer](https://getcomposer.org/download/)
-* [Node.js](http://nodejs.org/) >= 0.12.x
+* [Node.js](http://nodejs.org/) >= 4.5
 
 ## Theme installation
 
-From the command line, run the following commands from the root of your WordPress site (where `composer.json` exists). These instructions assume you're using a [Bedrock](https://roots.io/bedrock/)-based WordPress setup. If you're using Vagrant, make sure to run these commands from the Vagrant box (`vagrant ssh`). Create a new theme based on Sage by using Composer's [`create-project`](https://getcomposer.org/doc/03-cli.md#create-project):
+Install Sage using Composer from your WordPress themes directory (replace `your-theme-name` below with the name of your theme):
 
 ```shell
-# @ example.com/site
-$ composer create-project roots/sage web/app/themes/your-theme-name 9.0.0-alpha.1
-```
-
-Then activate the theme via [wp-cli](http://wp-cli.org/commands/theme/activate/):
-
-```shell
-# @ example.com/site
-$ wp theme activate your-theme-name
+# @ example.com/site/web/app/themes/
+$ composer create-project roots/sage your-theme-name dev-master
 ```
 
 ## Theme structure
 
 ```shell
-themes/theme-name/        # → Root of your Sage based theme
+themes/your-theme-name/   # → Root of your Sage based theme
 ├── assets                # → Front-end assets
 │   ├── config.json       # → Settings for compiled assets
+│   ├── build/            # → Webpack and ESLint config
 │   ├── fonts/            # → Theme fonts
 │   ├── images/           # → Theme images
 │   ├── scripts/          # → Theme JS
 │   └── styles/           # → Theme stylesheets
 ├── composer.json         # → Autoloading for `src/` files
-├── composer.lock         # → Composer lock file (never manually edit)
-├── dist/                 # → Built theme assets (never manually edit)
-├── functions.php         # → Never manually edit
+├── composer.lock         # → Composer lock file (never edit)
+├── dist/                 # → Built theme assets (never edit)
+├── functions.php         # → Composer autoloader, theme includes
 ├── index.php             # → Never manually edit
-├── node_modules/         # → Node.js packages (never manually edit)
+├── node_modules/         # → Node.js packages (never edit)
 ├── package.json          # → Node.js dependencies and scripts
 ├── screenshot.png        # → Theme screenshot for WP admin
 ├── src/                  # → Theme PHP
+│   ├── lib/Sage/         # → Theme wrapper, asset manifest
+│   ├── admin.php         # → Theme customizer setup
+│   ├── filters.php       # → Theme filters
+│   ├── helpers.php       # → Helper functions
+│   └── setup.php         # → Theme setup
 ├── style.css             # → Theme meta information
 ├── templates/            # → Theme templates
 │   ├── layouts/          # → Base templates
 │   └── partials/         # → Partial templates
-├── vendor/               # → Composer packages (never manually edit)
-├── watch.js              # → Webpack/BrowserSync watch config
-└── webpack.config.js     # → Webpack config
+└── vendor/               # → Composer packages (never edit)
 ```
 
 ## Theme setup
 
-Edit `src/lib/setup.php` to enable or disable theme features, setup navigation menus, post thumbnail sizes, post formats, and sidebars.
+Edit `src/setup.php` to enable or disable theme features, setup navigation menus, post thumbnail sizes, post formats, and sidebars.
 
 ## Theme development
 
@@ -101,26 +84,25 @@ $ npm install
 
 You now have all the necessary dependencies to run the build process.
 
-### Available build commands
+### Build commands
 
 * `npm run build` — Compile and optimize the files in your assets directory
-* `npm run watch` — Compile assets when file changes are made, start BrowerSync session
+* `npm run start` — Compile assets when file changes are made, start BrowserSync session
 * `npm run build:production` — Compile assets for production
 
 ### Using BrowserSync
 
-To use BrowserSync during `npm watch` you need to update `devUrl` at the bottom of `assets/config.json` to reflect your local development hostname.
+To use BrowserSync during `npm run start` you need to update `devUrl` at the bottom of `assets/config.json` to reflect your local development hostname.
 
-For example, if your local development URL is `https://project-name.dev` you would update the file to read:
+If your local development URL is `https://project-name.dev`, update the file to read:
 ```json
 ...
   "devUrl": "https://project-name.dev",
 ...
 ```
 
-If you are not using [Bedrock](https://roots.io/bedrock/), you should also update `publicPatch` to reflect your folder strutcture.
+If you are not using [Bedrock](https://roots.io/bedrock/), update `publicPath` to reflect your folder structure:
 
-If your theme is placed in folder called `sage` in a standard wordpress setup it should look like this:
 ```json
 ...
   "output": {
@@ -132,7 +114,9 @@ If your theme is placed in folder called `sage` in a standard wordpress setup it
 
 ## Documentation
 
-Sage documentation is available at [https://roots.io/sage/docs/](https://roots.io/sage/docs/).
+Sage 8 documentation is available at [https://roots.io/sage/docs/](https://roots.io/sage/docs/).
+
+Sage 9 documention is currently in progress and can be viewed at [https://github.com/roots/docs/tree/sage-9/sage](https://github.com/roots/docs/tree/sage-9/sage).
 
 ## Contributing
 
