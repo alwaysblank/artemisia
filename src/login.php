@@ -8,7 +8,7 @@ namespace Roots\Sage\Login;
 
 // calling your own login css so you can style it
 function login_css() {
-  wp_enqueue_style( 'login_css', get_template_directory_uri() . '/login/login.css', false );
+  wp_enqueue_style( 'login_css', get_template_directory_uri() . '/templates/login/login.css', false );
 }
 
 // changing the logo link from wordpress.org to your site
