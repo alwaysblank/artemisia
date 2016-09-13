@@ -22,7 +22,7 @@ add_action( 'after_switch_theme', __NAMESPACE__ . '\\do_flush_rewrite_rules' );
  * 'icon'           - https://developer.wordpress.org/resource/dashicons
  * 'supports'       - array() of available fields
  * 'exclude_search' - true/false should be excluded from search results
- * 'hierarchical'   - itrue/false whether the post type is hierarchical
+ * 'hierarchical'   - true/false whether the post type is hierarchical
  */
 
 function custom_post_types() {
