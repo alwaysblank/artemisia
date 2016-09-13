@@ -42,13 +42,14 @@ function custom_post_types() {
 
   foreach( $cpt_list as $cpt => $data) :
 
-    $single         = empty($data['single'])         ? 'Post Type'             : $data['single'];
-    $plural         = empty($data['plural'])         ? 'Post Types'            : $data['plural'];
-    $icon           = empty($data['icon'])           ? 'dashicons-book'        : $data['icon'];
-    $position       = empty($data['position'])       ? 20                      : $data['position'];
-    $supports       = empty($data['supports'])       ? array('title','editor') : $data['supports'];
-    $exclude_search = empty($data['exclude_search']) ? false                   : $data['exclude_search'];
-    $hierarchical   = empty($data['hierarchical'])   ? false                   : $data['hierarchical'];
+    # Null coalescing operators
+    $single         = $data['single']         ?? 'Post Type';
+    $plural         = $data['plural']         ?? 'Post Types';
+    $icon           = $data['icon']           ?? 'dashicons-book';
+    $position       = $data['position']       ?? 20;
+    $supports       = $data['supports']       ?? array('title','editor');
+    $exclude_search = $data['exclude_search'] ?? false;
+    $hierarchical   = $data['hierarchical']   ?? false;
 
     $labels = array(
       'name' => _x($plural, 'post type general name'),
