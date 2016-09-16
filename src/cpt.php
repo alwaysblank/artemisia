@@ -36,6 +36,7 @@ function custom_post_types() {
     'custom_post_type' => array (
       'single'         => 'Custom Type',
       'plural'         => 'Custom Types',
+      'slug'           => 'custom-types',
       'position'       => 3,
       'icon'           => 'dashicons-unlock',
       'supports'       => array('title','editor','page-attributes')
@@ -52,7 +53,7 @@ function custom_post_types() {
       'post_type' => 'custom_post_type',
       'single'    => 'Taxonomy',
       'plural'    => 'Taxonomies',
-      'slug'      => 'taxonomy',
+      'slug'      => 'my-taxonomy',
     )
   );
 
@@ -63,6 +64,7 @@ function custom_post_types() {
       # Null coalescing operators
       $single         = $data['single']         ?? 'Post Type';
       $plural         = $data['plural']         ?? 'Post Types';
+      $slug           = $data['slug']           ?? 'post-types';
       $icon           = $data['icon']           ?? 'dashicons-book';
       $position       = $data['position']       ?? 20;
       $supports       = $data['supports']       ?? array('title','editor','thumbnail');
@@ -90,7 +92,7 @@ function custom_post_types() {
         'exclude_from_search' => $exclude_search,
         'show_ui'             => true,
         'query_var'           => true,
-        'rewrite'             => true,
+        'rewrite'             => array( 'slug' => $slug ),
         'capability_type'     => 'post',
         'hierarchical'        => false,
         'has_archive'         => true,
