@@ -126,7 +126,7 @@ function custom_post_types() {
         'update_item'       => __( 'Update ' . $single ),
         'add_new_item'      => __( 'Add New ' . $single ),
         'new_item_name'     => __( 'New ' . $single . ' Name' ),
-        'menu_name'         => __( $single ),
+        'menu_name'         => __( $plural ),
       );
 
       $args = array(
@@ -135,7 +135,7 @@ function custom_post_types() {
         'show_ui'           => true,
         'show_admin_column' => true,
         'query_var'         => true,
-        'rewrite'           => array( 'slug' => 'genre' ),
+        'rewrite'           => array( 'slug' => $slug ),
       );
 
       register_taxonomy($ct, $cpt, $args);
