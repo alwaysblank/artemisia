@@ -64,7 +64,7 @@ function custom_post_types() {
       # Null coalescing operators
       $single         = $data['single']         ?? 'Post Type';
       $plural         = $data['plural']         ?? 'Post Types';
-      $slug           = $data['slug']           ?? 'post-types';
+      $slug           = $data['slug']           ?? $cpt;
       $icon           = $data['icon']           ?? 'dashicons-book';
       $position       = $data['position']       ?? 20;
       $supports       = $data['supports']       ?? array('title','editor','thumbnail');
@@ -113,7 +113,7 @@ function custom_post_types() {
       $cpt          = $data['post_type']    ?? 'post';
       $single       = $data['single']       ?? 'Taxonomy';
       $plural       = $data['plural']       ?? 'Taxonomies';
-      $slug         = $data['slug']         ?? 'taxonomy';
+      $slug         = $data['slug']         ?? $ct;
       $hierarchical = $data['hierarchical'] ?? true;
 
       // Add new taxonomy, make it hierarchical (like categories)
