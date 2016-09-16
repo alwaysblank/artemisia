@@ -112,7 +112,7 @@ function custom_post_types() {
       $single       = $data['single']       ?? 'Taxonomy';
       $plural       = $data['plural']       ?? 'Taxonomies';
       $slug         = $data['slug']         ?? 'taxonomy';
-      $hierarchical = $data['hierarchical'] ?? false;
+      $hierarchical = $data['hierarchical'] ?? true;
 
       // Add new taxonomy, make it hierarchical (like categories)
       $labels = array(
