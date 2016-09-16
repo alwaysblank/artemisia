@@ -32,7 +32,7 @@ function custom_post_types() {
       'plural'         => 'Custom Types',
       'position'       => 3,
       'icon'           => 'dashicons-unlock',
-      'supports'       => array('title','editor','thumbnail','page-attributes')
+      'supports'       => array('title','editor','page-attributes')
     ),
     'default_cpt' => array (
       'single'         => 'Default Type',
@@ -47,37 +47,38 @@ function custom_post_types() {
     $plural         = $data['plural']         ?? 'Post Types';
     $icon           = $data['icon']           ?? 'dashicons-book';
     $position       = $data['position']       ?? 20;
-    $supports       = $data['supports']       ?? array('title','editor');
+    $supports       = $data['supports']       ?? array('title','editor','thumbnail');
     $exclude_search = $data['exclude_search'] ?? false;
     $hierarchical   = $data['hierarchical']   ?? false;
 
     $labels = array(
-      'name' => _x($plural, 'post type general name'),
-      'singular_name' => _x($single, 'post type singular name'),
-      'add_new' => _x('Add New', $single),
-      'add_new_item' => __('Add New '. $single),
-      'edit_item' => __('Edit '.$single),
-      'new_item' => __('New '.$single),
-      'view_item' => __('View '.$single),
-      'search_items' => __('Search '.$plural),
-      'not_found' =>  __('No '.$plural.' found'),
+      'name'               => _x($plural, 'post type general name'),
+      'singular_name'      => _x($single, 'post type singular name'),
+      'add_new'            => _x('Add New', $single),
+      'add_new_item'       => __('Add New '. $single),
+      'edit_item'          => __('Edit '.$single),
+      'new_item'           => __('New '.$single),
+      'view_item'          => __('View '.$single),
+      'search_items'       => __('Search '.$plural),
+      'not_found'          => __('No '.$plural.' found'),
       'not_found_in_trash' => __('No '.$plural.' found in Trash'),
-      'parent_item_colon' => ''
+      'parent_item_colon'  => ''
     );
 
     $args = array(
-      'labels' => $labels,
-      'public' => true,
-      'publicly_queryable' => true,
+      'labels'              => $labels,
+      'public'              => true,
+      'publicly_queryable'  => true,
       'exclude_from_search' => $exclude_search,
-      'show_ui' => true,
-      'query_var' => true,
-      'rewrite' => true,
-      'capability_type' => 'post',
-      'hierarchical' => false,
-      'menu_icon' => $icon,
-      'menu_position' => $position,
-      'supports' => $supports
+      'show_ui'             => true,
+      'query_var'           => true,
+      'rewrite'             => true,
+      'capability_type'     => 'post',
+      'hierarchical'        => false,
+      'has_archive'         => true,
+      'menu_icon'           => $icon,
+      'menu_position'       => $position,
+      'supports'            => $supports
     );
 
     register_post_type($cpt, $args);
