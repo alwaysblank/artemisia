@@ -16,19 +16,21 @@ add_action( 'after_switch_theme', __NAMESPACE__ . '\\do_flush_rewrite_rules' );
  * Each content type can have a few optional overides,
  * otherwise the default value is used.
  *
- * 'single'         - single name for display titles
- * 'plural'         - plural name for display titles
- * 'position'       - change the weight of the nav icon
- * 'icon'           - https://developer.wordpress.org/resource/dashicons
- * 'supports'       - array() of available fields
- * 'exclude_search' - true/false should be excluded from search results
- * 'hierarchical'   - true/false whether the post type is hierarchical
+ * 'single'          - single name for display titles
+ * 'plural'          - plural name for display titles
+ * 'position'        - change the weight of the nav icon
+ * 'icon'            - https://developer.wordpress.org/resource/dashicons
+ * 'supports'        - array() of available fields
+ * 'exclude_search'  - true/false should be excluded from search results
+ * 'hierarchical'    - true/false whether the post type is hierarchical
+ * 'capability_type' - 'post' (default) or 'page'
  *
  * Each taxonomy can have a few optional overrides
- * 'post_type'      - which post type this taxonomy belongs to
- * 'single'         - single name for display titles
- * 'plural'         - plural name for display titles
- * 'hierarchical'   - true/false whether the taxonomy is hierarchical
+ *
+ * 'post_type'       - which post type this taxonomy belongs to
+ * 'single'          - single name for display titles
+ * 'plural'          - plural name for display titles
+ * 'hierarchical'    - true/false whether the taxonomy is hierarchical
  */
 
 function custom_post_types() {
@@ -62,14 +64,15 @@ function custom_post_types() {
     foreach( $cpt_list as $cpt => $data) :
 
       # Null coalescing operators
-      $single         = $data['single']         ?? 'Post Type';
-      $plural         = $data['plural']         ?? 'Post Types';
-      $slug           = $data['slug']           ?? $cpt;
-      $icon           = $data['icon']           ?? 'dashicons-book';
-      $position       = $data['position']       ?? 20;
-      $supports       = $data['supports']       ?? array('title','editor','thumbnail');
-      $exclude_search = $data['exclude_search'] ?? false;
-      $hierarchical   = $data['hierarchical']   ?? false;
+      $single          = $data['single']          ?? 'Post Type';
+      $plural          = $data['plural']          ?? 'Post Types';
+      $slug            = $data['slug']            ?? $cpt;
+      $icon            = $data['icon']            ?? 'dashicons-book';
+      $position        = $data['position']        ?? 20;
+      $supports        = $data['supports']        ?? array('title','editor','thumbnail');
+      $exclude_search  = $data['exclude_search']  ?? false;
+      $hierarchical    = $data['hierarchical']    ?? false;
+      $capability_type = $data['capability_type'] ?? 'post';
 
       $labels = array(
         'name'               => _x($plural, 'post type general name'),
@@ -93,8 +96,8 @@ function custom_post_types() {
         'show_ui'             => true,
         'query_var'           => true,
         'rewrite'             => array( 'slug' => $slug ),
-        'capability_type'     => 'post',
-        'hierarchical'        => false,
+        'capability_type'     => $capability_type,
+        'hierarchical'        => $hierarchical,
         'has_archive'         => true,
         'menu_icon'           => $icon,
         'menu_position'       => $position,
