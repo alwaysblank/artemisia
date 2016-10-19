@@ -140,7 +140,10 @@ function custom_post_types() {
         'show_ui'           => true,
         'show_admin_column' => true,
         'query_var'         => true,
-        'rewrite'           => array( 'slug' => $slug ),
+        'rewrite'           => array(
+          'slug'       => $slug,
+          'with_front' => true,
+        ),
       );
 
       register_taxonomy($ct, $cpt, $args);
