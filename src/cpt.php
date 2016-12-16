@@ -1,6 +1,6 @@
 <?php
 
-namespace Roots\Sage\CPT;
+namespace App;
 
 /**
  * Flush rewrite rules
@@ -8,7 +8,7 @@ namespace Roots\Sage\CPT;
 function do_flush_rewrite_rules() {
 	flush_rewrite_rules();
 }
-add_action( 'after_switch_theme', __NAMESPACE__ . '\\do_flush_rewrite_rules' );
+add_action( 'after_switch_theme', 'App\\do_flush_rewrite_rules' );
 
 /**
  * bulk custom post types
@@ -152,4 +152,4 @@ function custom_post_types() {
   endif;
 }
 
-add_action( 'init', __NAMESPACE__ . '\\custom_post_types');
+add_action( 'init', 'App\\custom_post_types');

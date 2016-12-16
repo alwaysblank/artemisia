@@ -1,6 +1,6 @@
 <?php
 
-namespace Roots\Sage\Login;
+namespace App;
 
 /**
  * Custom Login Page
@@ -18,6 +18,6 @@ function login_url() {  return home_url(); }
 function login_title() { return get_option( 'blogname' ); }
 
 // calling it only on the login page
-add_action( 'login_enqueue_scripts', __NAMESPACE__ . '\\login_css', 10 );
-add_filter( 'login_headerurl', __NAMESPACE__ . '\\login_url' );
-add_filter( 'login_headertitle', __NAMESPACE__ . '\\login_title' );
+add_action( 'login_enqueue_scripts', 'App\\login_css', 10 );
+add_filter( 'login_headerurl', 'App\\login_url' );
+add_filter( 'login_headertitle', 'App\\login_title' );
