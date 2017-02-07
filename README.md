@@ -2,19 +2,24 @@
 [![Packagist](https://img.shields.io/packagist/vpre/roots/sage.svg?style=flat-square)](https://packagist.org/packages/roots/sage)
 [![devDependency Status](https://img.shields.io/david/dev/roots/sage.svg?style=flat-square)](https://david-dm.org/roots/sage#info=devDependencies)
 [![Build Status](https://img.shields.io/travis/roots/sage.svg?style=flat-square)](https://travis-ci.org/roots/sage)
+[![Sponsored by ES6.io](https://img.shields.io/badge/%F0%9F%92%9A_Sponsored_by-ES6.io%20Tutorials-brightgreen.svg?style=flat-square)](https://roots.io/r/es6)
 
 Sage is a WordPress starter theme with a modern development workflow.
 
-**Sage 9 is in active development and is only currently in alpha. The `master` branch tracks Sage 9 development. If you want a stable version, use the [latest Sage 8 release](https://github.com/roots/sage/releases/latest).**
+**Sage 9 is in active development and is currently in beta. The `master` branch tracks Sage 9 development. If you want a stable version, use the [latest Sage 8 release](https://github.com/roots/sage/releases/latest).**
 
 ## Features
 
 * Sass for stylesheets
 * ES6 for JavaScript
 * [Webpack](https://webpack.github.io/) for compiling assets, optimizing images, and concatenating and minifying files
-* [BrowserSync](http://www.browsersync.io/) for synchronized browser testing
-* [Bootstrap 4](http://getbootstrap.com/) for a front-end framework (can be removed or replaced)
-* [Laravel Blade](https://laravel.com/docs/5.3/blade) as a templating engine
+* [Browsersync](http://www.browsersync.io/) for synchronized browser testing
+* [Laravel's Blade](https://laravel.com/docs/5.3/blade) as a templating engine
+* CSS framework options:
+  * [Bootstrap 4](http://getbootstrap.com/)
+  * [Foundation](http://foundation.zurb.com/)
+  * None (blank slate)
+* Font Awesome (optional)
 
 See a working example at [roots-example-project.com](https://roots-example-project.com/).
 
@@ -35,6 +40,13 @@ Install Sage using Composer from your WordPress themes directory (replace `your-
 # @ app/themes/ or wp-content/themes/
 $ composer create-project roots/sage your-theme-name dev-master
 ```
+
+During theme installation you will have the options to:
+
+* Update theme headers (theme name, description, author, etc.)
+* Select a CSS framework (Bootstrap, Foundation, none)
+* Add Font Awesome
+* Configure Browsersync (path to theme, local development URL)
 
 ## Theme structure
 
@@ -70,7 +82,7 @@ themes/your-theme-name/   # → Root of your Sage based theme
 
 ## Theme setup
 
-Edit `src/setup.php` to enable or disable theme features, setup navigation menus, post thumbnail sizes, post formats, and sidebars.
+Edit `src/setup.php` to enable or disable theme features, setup navigation menus, post thumbnail sizes, and sidebars.
 
 ## Theme development
 
@@ -81,7 +93,7 @@ Sage uses [Webpack](https://webpack.github.io/) as a build tool and [npm](https:
 From the command line on your host machine (not on your Vagrant development box), navigate to the theme directory then run `yarn`:
 
 ```shell
-# @ example.com/site/web/app/themes/your-theme-name
+# @ themes/your-theme-name/
 $ yarn
 ```
 
@@ -95,9 +107,9 @@ You now have all the necessary dependencies to run the build process.
 
 #### Additional commands
 
-* `yarn run clean` — Remove your `dist/` folder
-* `yarn run lint` — Run eslint against your assets and build scripts
-* `composer test` — Check your PHP for code smells with `phpmd` and PSR-2 compliance with `phpcs`
+* `yarn run rmdist` — Remove your `dist/` folder
+* `yarn run lint` — Run ESLint against your assets and build scripts
+* `composer test` — Check your PHP for PSR-2 compliance with `phpcs`
 
 ### Using Browsersync
 
@@ -114,7 +126,7 @@ If you are not using [Bedrock](https://roots.io/bedrock/), update `publicPath` t
 
 ```json
 ...
-  "publicPath": "/wp-content/themes/sage/"
+  "publicPath": "/wp-content/themes/sage"
 ...
 ```
 

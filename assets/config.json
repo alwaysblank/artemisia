@@ -15,5 +15,10 @@
   "publicPath": "/app/themes/__project-name__",
   "devUrl": "https://__project-name__.dev",
   "proxyUrl": "https://localhost:3000",
-  "cacheBusting": "[name]_[hash:8]"
+  "cacheBusting": "[name]_[hash:8]",
+  "browsers": [
+    "last 2 versions",
+    "android 4",
+    "opera 12"
+  ]
 }

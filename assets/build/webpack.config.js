@@ -2,29 +2,16 @@
 
 const webpack = require('webpack');
 const qs = require('qs');
+const merge = require('webpack-merge');
 const autoprefixer = require('autoprefixer');
 const CleanPlugin = require('clean-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const CopyGlobsPlugin = require('./webpack.plugin.copyglobs');
-const mergeWithConcat = require('./util/mergeWithConcat');
 const config = require('./config');
 
 const assetsFilenames = (config.enabled.cacheBusting) ? config.cacheBusting : '[name]';
 const sourceMapQueryStr = (config.enabled.sourceMaps) ? '+sourceMap' : '-sourceMap';
-
-const jsLoader = {
-  test: /\.js$/,
-  exclude: [/(node_modules|bower_components)(?![/|\\](bootstrap|foundation-sites))/],
-  use: [{
-    loader: 'buble',
-    options: { objectAssign: 'Object.assign' },
-  }],
-};
-
-if (config.enabled.watcher) {
-  jsLoader.use.unshift('monkey-hot?sourceType=module');
-}
 
 let webpackConfig = {
   context: config.paths.assets,
@@ -37,7 +24,6 @@ let webpackConfig = {
   },
   module: {
     rules: [
-      jsLoader,
       {
         enforce: 'pre',
         test: /\.js?$/,
@@ -45,10 +31,17 @@ let webpackConfig = {
         loader: 'eslint',
       },
       {
+        test: /\.js$/,
+        exclude: [/(node_modules|bower_components)(?![/|\\](bootstrap|foundation-sites))/],
+        loader: 'buble',
+        options: { objectAssign: 'Object.assign' },
+      },
+      {
         test: /\.css$/,
         include: config.paths.assets,
         loader: ExtractTextPlugin.extract({
           fallbackLoader: 'style',
+          publicPath: '../',
           loader: [
             `css?${sourceMapQueryStr}`,
             'postcss',
@@ -60,6 +53,7 @@ let webpackConfig = {
         include: config.paths.assets,
         loader: ExtractTextPlugin.extract({
           fallbackLoader: 'style',
+          publicPath: '../',
           loader: [
             `css?${sourceMapQueryStr}`,
             'postcss',
@@ -71,11 +65,9 @@ let webpackConfig = {
       {
         test: /\.(png|jpe?g|gif|svg|ico)$/,
         include: config.paths.assets,
-        use: [
-          `file?${qs.stringify({
-            name: `[path]${assetsFilenames}.[ext]`,
-          })}`,
-        ],
+        loader: `file?${qs.stringify({
+          name: `[path]${assetsFilenames}.[ext]`,
+        })}`,
       },
       {
         test: /\.(ttf|eot)$/,
@@ -122,9 +114,12 @@ let webpackConfig = {
       root: config.paths.root,
       verbose: false,
     }),
+    /**
+     * It would be nice to switch to copy-webpack-plugin, but
+     * unfortunately it doesn't provide a reliable way of
+     * tracking the before/after file names
+     */
     new CopyGlobsPlugin({
-      // It would be nice to switch to copy-webpack-plugin, but unfortunately it doesn't
-      // provide a reliable way of tracking the before/after file names
       pattern: config.copy,
       output: `[path]${assetsFilenames}.[ext]`,
       manifest: config.manifest,
@@ -141,11 +136,6 @@ let webpackConfig = {
       Tether: 'tether',
       'window.Tether': 'tether',
     }),
-    new webpack.DefinePlugin({
-      WEBPACK_PUBLIC_PATH: (config.enabled.watcher)
-        ? JSON.stringify(config.publicPath)
-        : false,
-    }),
     new webpack.LoaderOptionsPlugin({
       minimize: config.enabled.optimize,
       debug: config.enabled.watcher,
@@ -157,7 +147,7 @@ let webpackConfig = {
         output: { path: config.paths.dist },
         context: config.paths.assets,
         postcss: [
-          autoprefixer({ browsers: ['last 2 versions', 'android 4', 'opera 12'] }),
+          autoprefixer({ browsers: config.browsers }),
         ],
       },
     }),
@@ -173,11 +163,11 @@ let webpackConfig = {
 /* eslint-disable global-require */ /** Let's only load dependencies as needed */
 
 if (config.enabled.optimize) {
-  webpackConfig = mergeWithConcat(webpackConfig, require('./webpack.config.optimize'));
+  webpackConfig = merge(webpackConfig, require('./webpack.config.optimize'));
 }
 
 if (config.env.production) {
-  webpackConfig.plugins.push(new webpack.NoErrorsPlugin());
+  webpackConfig.plugins.push(new webpack.NoEmitOnErrorsPlugin());
 }
 
 if (config.enabled.cacheBusting) {
@@ -196,7 +186,7 @@ if (config.enabled.cacheBusting) {
 
 if (config.enabled.watcher) {
   webpackConfig.entry = require('./util/addHotMiddleware')(webpackConfig.entry);
-  webpackConfig = mergeWithConcat(webpackConfig, require('./webpack.config.watch'));
+  webpackConfig = merge(webpackConfig, require('./webpack.config.watch'));
 }
 
 module.exports = webpackConfig;
