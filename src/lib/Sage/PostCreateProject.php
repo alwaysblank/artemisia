@@ -15,12 +15,12 @@ class PostCreateProject
             $io->write('<info>Define theme headers. Press enter key for default.</info>');
 
             $theme_headers_default = [
-                'name'        => 'Sage Starter Theme',
-                'uri'         => 'https://roots.io/sage/',
-                'description' => 'Sage is a WordPress starter theme.',
-                'version'     => '9.0.0-beta.2',
-                'author'      => 'Roots',
-                'author_uri'  => 'https://roots.io/'
+                'name'        => 'Murmur Creative Project',
+                'uri'         => 'https://murmurcreative.com/services/web-development/',
+                'description' => 'This theme has been custom-built by Murmur Creative. It is based on roots/sage.',
+                'version'     => '0.0',
+                'author'      => 'Murmur Creative',
+                'author_uri'  => 'https://murmurcreative.com/'
             ];
             $theme_headers = [
               'name'        => $io->ask('<info>Theme Name [<comment>'.$theme_headers_default['name'].'</comment>]:</info> ', $theme_headers_default['name']),
@@ -54,7 +54,7 @@ class PostCreateProject
                 'Foundation',
                 'None'
             ];
-            $framework = $io->select('<info>Select a CSS framework</info> <comment>(Default: Bootstrap)</comment>', $frameworks, 0);
+            $framework = $io->select('<info>Select a CSS framework</info> <comment>(Default: None)</comment>', $frameworks, 2);
 
             switch($framework) {
                 case 0:
@@ -106,9 +106,11 @@ class PostCreateProject
         if ($io->isInteractive()) {
             $io->write('<info>Configure build settings. Press enter key for default.</info>');
 
+            $current_settings = json_decode(file_get_contents('assets/config.json'));
+
             $browsersync_settings_default = [
-                'publicPath'  => '/app/themes/'.basename(getcwd()),
-                'devUrl'      => 'http://example.dev'
+                'publicPath'  => $current_settings->publicPath,
+                'devUrl'      => $current_settings->devUrl
             ];
 
             $browsersync_settings = [
