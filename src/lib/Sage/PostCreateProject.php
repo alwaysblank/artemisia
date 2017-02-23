@@ -24,17 +24,25 @@ class PostCreateProject
                 'use-fields' => $io->ask('<info><options=bold>Use Fields</>  Simplify your interactions with ACF. (<comment>y/N</comment>)</info>')
             ];
 
+            $repositories = json_decode(file_get_contents('composer.json'))->repositories;
+
             foreach ($packages as $package => $install) :
                 if (strtolower($install) === 'y') :
-                    $to_install[] = sprintf('murmurcreative/%s', $package);
+                    if($repositories->{sprintf('murmurcreative/%s', $package)}) :
+                        $to_install[] = sprintf('murmurcreative/%s', $package);
+                    endif;
                 endif;
             endforeach;
 
             if(isset($to_install) && count($to_install) > 0) :
                 $exec->execute(sprintf('composer require %s --no-suggest', join(' ', $to_install)));
+                $io->write('<info> ✨ Well Done!✨ </info>');
+            else :
+                $io->write('<info> Nothing to install! </info>');
+                $io->write('<info> Moving on ... </info>');
             endif;
 
-            $io->write('<info> ✨ Well Done!✨ </info>');
+
         endif;
     }
 
