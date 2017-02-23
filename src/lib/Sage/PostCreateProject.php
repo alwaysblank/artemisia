@@ -35,10 +35,11 @@ class PostCreateProject
             endforeach;
 
             if(isset($to_install) && count($to_install) > 0) :
-                $exec->execute(sprintf('composer require %s --no-suggest', join(' ', $to_install)));
+                $io->write('<comment> 💭 Thinking ... 💭 </comment>');
+                $exec->execute(sprintf('composer require %s --no-suggest --ansi', join(' ', $to_install)));
                 $io->write('<info> ✨ Well Done!✨ </info>');
             else :
-                $io->write('<info> Nothing to install! </info>');
+                $io->write('<comment> Nothing to install! </comment>');
                 $io->write('<info> Moving on ... </info>');
             endif;
 
