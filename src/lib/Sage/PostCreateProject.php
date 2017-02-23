@@ -3,12 +3,43 @@
 namespace Roots\Sage;
 
 use Composer\Script\Event;
+use Composer\Package\RootPackage;
+use Composer\Util\ProcessExecutor;
 
 class PostCreateProject
 {
+    public static function addMurmurTools(Event $event) {
+        // @codingStandardsIgnoreStart
+        $io = $event->getIO();
+
+        if ($io->isInteractive()) :
+            $exec = new ProcessExecutor($io);
+
+            $io->write('<info>Add optional packages.</info>');
+
+            $packages = [
+                'better-excerpt' => $io->ask('<info><options=bold>Better Excerpt</>  Helps make more flexible excerpts. (<comment>y/N</comment>)</info>'),
+                'cabinet' => $io->ask('<info><options=bold>Cabinet</>  A handy file wrapper post type, with pointers! (<comment>y/N</comment>)</info>'),
+                'image-tools' => $io->ask('<info><options=bold>Image Tools</>  A collection of simple tools for interfacing with WP\'s media library. (<comment>y/N</comment>)</info>'),
+                'use-fields' => $io->ask('<info><options=bold>Use Fields</>  Simplify your interactions with ACF. (<comment>y/N</comment>)</info>')
+            ];
+
+            foreach ($packages as $package => $install) :
+                if (strtolower($install) === 'y') :
+                    $to_install[] = sprintf('murmurcreative/%s', $package);
+                endif;
+            endforeach;
+
+            if(isset($to_install) && count($to_install) > 0) :
+                $exec->execute(sprintf('composer require %s --no-suggest', join(' ', $to_install)));
+            endif;
+
+            $io->write('<info> ✨ Well Done!✨ </info>');
+        endif;
+    }
+
     public static function updateHeaders(Event $event)
     {
-        // @codingStandardsIgnoreStart
         $io = $event->getIO();
 
         if ($io->isInteractive()) {
