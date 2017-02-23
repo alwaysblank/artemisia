@@ -2,7 +2,7 @@
   "entry": {
     "main": [
       "./scripts/main.js",
-      "./styles/main.scss"
+      "./styles/main.css"
     ],
     "customizer": [
       "./scripts/customizer.js"
@@ -18,7 +18,6 @@
   "cacheBusting": "[name]_[hash:8]",
   "browsers": [
     "last 2 versions",
-    "android 4",
-    "opera 12"
+    "not ie < 11"
   ]
 }

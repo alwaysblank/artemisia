@@ -1,0 +1,13 @@
+/* Global Styles */
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 18px;
+}
+
+body {
+  padding: var(--size-bm);
+}

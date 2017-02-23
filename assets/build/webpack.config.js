@@ -3,7 +3,10 @@
 const webpack = require('webpack');
 const qs = require('qs');
 const merge = require('webpack-merge');
-const autoprefixer = require('autoprefixer');
+const cssImport = require('postcss-import');
+const cssNext = require('postcss-cssnext');
+const objectFit = require('postcss-object-fit-images');
+const nthAndroidChildFix = require ('postcss-nth-child-fix');
 const CleanPlugin = require('clean-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
@@ -45,20 +48,6 @@ let webpackConfig = {
           loader: [
             `css?${sourceMapQueryStr}`,
             'postcss',
-          ],
-        }),
-      },
-      {
-        test: /\.scss$/,
-        include: config.paths.assets,
-        loader: ExtractTextPlugin.extract({
-          fallbackLoader: 'style',
-          publicPath: '../',
-          loader: [
-            `css?${sourceMapQueryStr}`,
-            'postcss',
-            `resolve-url?${sourceMapQueryStr}`,
-            `sass?${sourceMapQueryStr}`,
           ],
         }),
       },
@@ -142,12 +131,17 @@ let webpackConfig = {
       stats: { colors: true },
     }),
     new webpack.LoaderOptionsPlugin({
-      test: /\.s?css$/,
+      test: /\.css$/,
       options: {
         output: { path: config.paths.dist },
         context: config.paths.assets,
         postcss: [
-          autoprefixer({ browsers: config.browsers }),
+          cssImport,
+          objectFit,
+          nthAndroidChildFix,
+          cssNext({
+            browsers: config.browsers
+          })
         ],
       },
     }),

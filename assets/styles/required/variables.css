@@ -1,0 +1,105 @@
+/* Variables */
+
+:root {
+
+  /* Sizes */
+
+    --size: 1rem;
+
+    /* (these sizes are based on the Golden Ratio) */
+    --size-bwww: calc(var(--size) * 0.236);
+    --size-bww: calc(var(--size) * 0.382);
+    --size-bw: calc(var(--size) * 0.618);
+    --size-b: var(--size);
+    --size-bm: calc(var(--size) * 1.618);
+    --size-bmm: calc(var(--size) * 2.618);
+    --size-bmmm: calc(var(--size) * 4.236);
+    --size-bmmmm: calc(var(--size) * 6.854);
+
+    /* These provide some intermediate values */
+    --size-bwwu: calc(((0.236 + 0.382) / 2) * var(--size-b));
+    --size-bwu: calc(((0.382 + 0.618) / 2) * var(--size-b));
+    --size-bu: calc(((0.618 + 1) / 2) * var(--size-b));
+    --size-bn: calc(((1 + 1.618) / 2) * var(--size-b));
+    --size-bmn: calc(((1.618 + 2.618) / 2) * var(--size-b));
+    --size-bmmn: calc(((2.618 + 4.236) / 2) * var(--size-b));
+    --size-bmmmn: calc(((4.236 + 6.854) / 2) * var(--size-b));
+
+  /* Type */
+
+    /* Face */
+    --type-face-headline: serif;
+    --type-face-body: sans-serif;
+
+    /* Size */
+    /* This essentially replicates the "size" definitions,
+      but is split out here in case we need to separate
+      type size from spacing size. */
+    --type-size-bwww: var(--size-bwww);
+    --type-size-bwwu: var(--size-bwwu);
+    --type-size-bww: var(--size-bww);
+    --type-size-bwu: var(--size-bwu);
+    --type-size-bw: var(--size-bw);
+    --type-size-bu: var(--size-bu);
+    --type-size-b: var(--size-b);
+    --type-size-bn: var(--size-bn);
+    --type-size-bm: var(--size-bm);
+    --type-size-bmn: var(--size-bmn);
+    --type-size-bmm: var(--size-bmm);
+    --type-size-bmmn: var(--size-bmmn);
+    --type-size-bmmm: var(--size-bmmm);
+    --type-size-bmmmu: var(--size-bmmmu);
+    --type-size-bmmmm: var(--size-bmmmm);
+
+  /* Position */
+
+    /* Layers */
+    --z--core: -20;
+    --z--mantle: -10;
+    --z-crust: 0;
+    --z-surface: 10;
+    --z-atmosphere: 20;
+    --z-orbit: 30;
+
+  /* Colors */
+
+    /* Primary : Murmur Gold */
+    --color-gold-hex: #BA803C;
+    --color-gold-h: 32;
+    --color-gold-s: 51%;
+    --color-gold-l: 48%;
+    --color-gold: hsl(var(--color-gold-h) var(--color-gold-s) var(--color-gold-l));
+    --color-primary: var(--color-gold);
+      /* Variant */
+      --color-gold-light: color(var(--color-gold) lightness(+ 10%));
+
+    /* Secondary : Murmur Brown */
+    --color-brown-hex: #241F1C;
+    --color-brown-h: 23;
+    --color-brown-s: 13%;
+    --color-brown-l: 13%;
+    --color-brown: hsl(var(--color-brown-h) var(--color-brown-s) var(--color-brown-l));
+    --color-secondary: var(--color-brown);
+
+    /* Accent : Murmur Gray */
+    --color-gray-hex: #F4F2EF;
+    --color-gray-h: 36;
+    --color-gray-s: 19%;
+    --color-gray-l: 95%;
+    --color-gray: hsl(var(--color-gray-h) var(--color-gray-s) var(--color-gray-l));
+    --color-accent: var(--color-gray);
+
+    /* Black */
+    /* This assigns a separate value for "black" elements, i.e.
+        body text, etc, that is different from actual black. */
+    --color-black-hex: var(--color-brown-hex);
+    --color-black-h: var(--color-brown-h);
+    --color-black-s: var(--color-brown-s);
+    --color-black-l: var(--color-brown-l);
+    --color-black: hsl(var(--color-black-h) var(--color-black-s) var(--color-black-l));
+
+  /* Speed */
+    --speed-fast: 0.15s;
+    --speed-normal: 0.3s;
+    --speed-slow: 0.6s;
+}
