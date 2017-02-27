@@ -67,6 +67,14 @@ add_action('after_setup_theme', function () {
      * @see assets/styles/layouts/_tinymce.scss
      */
     add_editor_style(asset_path('styles/main.css'));
+
+    /**  
+     * Remove WP emojis
+     */
+    remove_action('wp_head', 'print_emoji_detection_script', 7);
+    remove_action('wp_print_styles', 'print_emoji_styles');
+    add_filter( 'emoji_svg_url', '__return_false' );
+
 }, 20);
 
 /**
