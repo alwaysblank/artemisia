@@ -78,6 +78,18 @@ add_action('after_setup_theme', function () {
 }, 20);
 
 /**
+ * Prints out a preload link in the header for all scripts enqueued
+ * for the footer.
+ */
+add_action('wp_head', function() {
+    foreach (wp_scripts()->groups as $handle => $group) :
+        if ($group === 1 && $src = wp_scripts()->registered[$handle]->src) :
+            printf('<link rel="preload" href="%s">', $src);
+        endif;
+    endforeach;
+});
+
+/**
  * Register sidebars
  */
 add_action('widgets_init', function () {
