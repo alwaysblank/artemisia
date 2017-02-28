@@ -1,15 +1,15 @@
 {
-  "name": "sage",
-  "version": "9.0.0-beta.2",
-  "author": "Roots <team@roots.io>",
-  "homepage": "https://roots.io/sage/",
+  "name": "artemisia",
+  "version": "0.9",
+  "author": "Ben Martinez-Bateman <ben@murmurcreative.com>",
+  "homepage": "https://bitbucket.org/benspants/artemisia/",
   "private": true,
   "repository": {
     "type": "git",
-    "url": "git://github.com/roots/sage.git"
+    "url": "git@bitbucket.org:benspants/artemisia.git"
   },
   "bugs": {
-    "url": "https://github.com/roots/sage/issues"
+    "url": "https://bitbucket.org/benspants/artemisia/issues"
   },
   "licenses": [
     {
