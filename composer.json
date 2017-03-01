@@ -28,20 +28,39 @@
       "Roots\\Sage\\": "src/lib/Sage/"
     }
   },
+  "repositories" : {
+    "murmurcreative/better-excerpt": {
+      "type": "vcs",
+      "url": "git@bitbucket.org:murmurcreative/better-excerpt.git"
+    },
+    "murmurcreative/cabinet": {
+      "type": "vcs",
+      "url": "git@bitbucket.org:murmurcreative/cabinet.git"
+    },
+    "murmurcreative/image-tools": {
+      "type": "vcs",
+      "url": "git@bitbucket.org:murmurcreative/image-tools.git"
+    },
+    "murmurcreative/use-fields": {
+      "type": "vcs",
+      "url": "git@bitbucket.org:murmurcreative/use-fields.git"
+    }
+  },
   "require": {
     "php": ">=5.6.4",
     "composer/installers": "~1.0",
-    "illuminate/view": "~5.3.0",
-    "illuminate/config": "~5.3.0"
+    "illuminate/view": "~5.4.0",
+    "illuminate/config": "~5.4.0"
   },
   "require-dev": {
     "squizlabs/php_codesniffer": "^2.5.1"
   },
   "scripts": {
     "test": [
-      "vendor/bin/phpcs"
+      "phpcs"
     ],
     "post-create-project-cmd": [
+        "Roots\\Sage\\PostCreateProject::addMurmurTools",
         "Roots\\Sage\\PostCreateProject::updateHeaders",
         "Roots\\Sage\\PostCreateProject::selectFramework",
         "Roots\\Sage\\PostCreateProject::addFontAwesome",
