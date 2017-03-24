@@ -1,3 +1,7 @@
+/* stylelint-disable indentation */
+/* stylelint-disable block-no-empty */
+/* stylelint-disable comment-empty-line-before */
+
 /* Variables */
 
 :root {
@@ -64,7 +68,7 @@
   /* Colors */
 
     /* Primary : Murmur Gold */
-    --color-gold-hex: #BA803C;
+    --color-gold-hex: #ba803c;
     --color-gold-h: 32;
     --color-gold-s: 51%;
     --color-gold-l: 48%;
@@ -74,7 +78,7 @@
       --color-gold-light: color(var(--color-gold) lightness(+ 10%));
 
     /* Secondary : Murmur Brown */
-    --color-brown-hex: #241F1C;
+    --color-brown-hex: #241f1c;
     --color-brown-h: 23;
     --color-brown-s: 13%;
     --color-brown-l: 13%;
@@ -82,7 +86,7 @@
     --color-secondary: var(--color-brown);
 
     /* Accent : Murmur Gray */
-    --color-gray-hex: #F4F2EF;
+    --color-gray-hex: #f4f2ef;
     --color-gray-h: 36;
     --color-gray-s: 19%;
     --color-gray-l: 95%;
