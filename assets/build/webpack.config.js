@@ -9,6 +9,7 @@ const objectFit = require('postcss-object-fit-images');
 const nthAndroidChildFix = require ('postcss-nth-child-fix');
 const CleanPlugin = require('clean-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const StyleLintPlugin = require('stylelint-webpack-plugin');
 
 const CopyGlobsPlugin = require('copy-globs-webpack-plugin');
 const config = require('./config');
@@ -144,6 +145,10 @@ let webpackConfig = {
           })
         ],
       },
+    }),
+    new StyleLintPlugin({
+      files: ['**/*.css'],
+      context: config.paths.assets
     }),
     new webpack.LoaderOptionsPlugin({
       test: /\.js$/,
