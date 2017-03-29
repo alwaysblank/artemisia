@@ -8,14 +8,13 @@
       "./scripts/customizer.js"
     ]
   },
-  "watch": [
-    "templates/**/*.php",
-    "src/**/*.php"
-  ],
   "publicPath": "/app/themes/__project-name__",
   "devUrl": "https://__project-name__.dev",
   "proxyUrl": "https://localhost:3000",
   "cacheBusting": "[name]_[hash:8]",
+  "watch": [
+    "{src,templates}/**/*.php"
+  ],
   "browsers": [
     "last 2 versions",
     "not ie < 11"
