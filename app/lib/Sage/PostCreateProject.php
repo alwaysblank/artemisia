@@ -71,7 +71,7 @@ class PostCreateProject
               'author_uri'  => $io->ask('<info>Theme Author URI [<comment>'.$theme_headers_default['author_uri'].'</comment>]:</info> ', $theme_headers_default['author_uri'])
             ];
 
-            file_put_contents('style.css', str_replace($theme_headers_default, $theme_headers, file_get_contents('style.css')));
+            file_put_contents('resources/style.css', str_replace($theme_headers_default, $theme_headers, file_get_contents('resources/style.css')));
         }
     }
 
@@ -81,10 +81,10 @@ class PostCreateProject
         $default_framework_pattern = '"bootstrap": ".*"';
 
         $files_to_clear = [
-          'assets/styles/components/_comments.scss',
-          'assets/styles/components/_forms.scss',
-          'assets/styles/components/_wp-classes.scss',
-          'assets/styles/layouts/_header.scss',
+          'resources/assets/styles/components/_comments.scss',
+          'resources/assets/styles/components/_forms.scss',
+          'resources/assets/styles/components/_wp-classes.scss',
+          'resources/assets/styles/layouts/_header.scss',
         ];
 
 
@@ -101,16 +101,16 @@ class PostCreateProject
                     break;
                 case 1:
                     file_put_contents('package.json', preg_replace("/{$default_framework_pattern}/", '"foundation-sites": "6.3.0"', file_get_contents('package.json')));
-                    file_put_contents('assets/styles/main.scss', str_replace('@import "~bootstrap/scss/bootstrap";' . "\n", '@import "~foundation-sites/scss/foundation";' . "\n" . '@include foundation-everything;' . "\n", file_get_contents('assets/styles/main.scss')));
-                    file_put_contents('assets/scripts/main.js', str_replace("import 'bootstrap';\n", "import 'foundation-sites/dist/js/foundation';\n", file_get_contents('assets/scripts/main.js')));
+                    file_put_contents('resources/assets/styles/main.scss', str_replace('@import "~bootstrap/scss/bootstrap";' . "\n", '@import "~foundation-sites/scss/foundation";' . "\n" . '@include foundation-everything;' . "\n", file_get_contents('resources/assets/styles/main.scss')));
+                    file_put_contents('resources/assets/scripts/main.js', str_replace("import 'bootstrap';\n", "import 'foundation-sites/dist/js/foundation';\n", file_get_contents('resources/assets/scripts/main.js')));
                     foreach($files_to_clear as $file) {
                         file_put_contents($file, '');
                     }
                     break;
                 case 2:
                     file_put_contents('package.json', preg_replace("/\s+{$default_framework_pattern},/", '', file_get_contents('package.json')));
-                    file_put_contents('assets/styles/main.scss', str_replace('@import "~bootstrap/scss/bootstrap";' . "\n", '', file_get_contents('assets/styles/main.scss')));
-                    file_put_contents('assets/scripts/main.js', str_replace("import 'bootstrap';\n", '', file_get_contents('assets/scripts/main.js')));
+                    file_put_contents('resources/assets/styles/main.scss', str_replace('@import "~bootstrap/scss/bootstrap";' . "\n", '', file_get_contents('resources/assets/styles/main.scss')));
+                    file_put_contents('resources/assets/scripts/main.js', str_replace("import 'bootstrap';\n", '', file_get_contents('resources/assets/scripts/main.js')));
                     foreach($files_to_clear as $file) {
                         file_put_contents($file, '');
                     }
@@ -133,8 +133,8 @@ class PostCreateProject
                 file_put_contents('package.json', $package);
 
                 $import_dep_str = '// Import npm dependencies' . "\n";
-                file_put_contents('assets/styles/main.scss', str_replace($import_dep_str, $import_dep_str . '@import "~font-awesome/scss/font-awesome";' . "\n", file_get_contents('assets/styles/main.scss')));
-                file_put_contents('assets/styles/common/_variables.scss', "\n" . '$fa-font-path:          \'~font-awesome/fonts\';' . "\n", FILE_APPEND);
+                file_put_contents('resources/assets/styles/main.scss', str_replace($import_dep_str, $import_dep_str . '@import "~font-awesome/scss/font-awesome";' . "\n", file_get_contents('resources/assets/styles/main.scss')));
+                file_put_contents('resources/assets/styles/common/_variables.scss', "\n" . '$fa-font-path:          \'~font-awesome/fonts\';' . "\n", FILE_APPEND);
             }
         }
     }
@@ -158,8 +158,8 @@ class PostCreateProject
                 'devUrl'      => $io->ask('<info>Local development URL of WP site [<comment>'.$browsersync_settings_default['devUrl'].'</comment>]:</info> ', $browsersync_settings_default['devUrl'])
             ];
 
-            file_put_contents('assets/config.json', str_replace('/app/themes/sage', $browsersync_settings['publicPath'], file_get_contents('assets/config.json')));
-            file_put_contents('assets/config.json', str_replace($browsersync_settings_default['devUrl'], $browsersync_settings['devUrl'], file_get_contents('assets/config.json')));
+            file_put_contents('resources/assets/config.json', str_replace('/app/themes/sage', $browsersync_settings['publicPath'], file_get_contents('resources/assets/config.json')));
+            file_put_contents('resources/assets/config.json', str_replace($browsersync_settings_default['devUrl'], $browsersync_settings['devUrl'], file_get_contents('resources/assets/config.json')));
         }
     }
     // @codingStandardsIgnoreEnd
