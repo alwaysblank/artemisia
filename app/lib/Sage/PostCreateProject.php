@@ -146,7 +146,7 @@ class PostCreateProject
         if ($io->isInteractive()) {
             $io->write('<info>Configure build settings. Press enter key for default.</info>');
 
-            $current_settings = json_decode(file_get_contents('assets/config.json'));
+            $current_settings = json_decode(file_get_contents('resources/assets/config.json'));
 
             $browsersync_settings_default = [
                 'publicPath'  => $current_settings->publicPath,
