@@ -13,7 +13,7 @@ use Roots\Sage\Template\BladeProvider;
  */
 add_action('wp_enqueue_scripts', function () {
     wp_enqueue_style('sage/main.css', asset_path('styles/main.css'), false, null);
-    wp_enqueue_script('sage/main.js', asset_path('scripts/main.js'), ['jquery'], null, true);
+    wp_enqueue_script('artemesia/preload/sage/main.js', asset_path('scripts/main.js'), ['jquery'], null, true);
 }, 100);
 
 /**
@@ -82,9 +82,9 @@ add_action('after_setup_theme', function () {
  * for the footer.
  */
 add_action('wp_head', function() {
-    foreach (wp_scripts()->groups as $handle => $group) :
-        if ($group === 1 && $src = wp_scripts()->registered[$handle]->src) :
-            printf('<link rel="preload" href="%s">', $src);
+    foreach (wp_scripts()->registered as $handle => $script) :
+        if(strpos($handle, 'artemesia/preload') === 0) :
+            printf('<link rel="preload" href="%s">', apply_filters('script_loader_src', $script->src));
         endif;
     endforeach;
 });
