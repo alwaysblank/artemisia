@@ -64,7 +64,7 @@ add_action('after_setup_theme', function () {
 
     /**
      * Use main stylesheet for visual editor
-     * @see assets/styles/layouts/_tinymce.scss
+     * @see resources/assets/styles/layouts/_tinymce.scss
      */
     add_editor_style(asset_path('styles/main.css'));
 
@@ -131,12 +131,14 @@ add_action('after_setup_theme', function () {
         'uri.stylesheet' => get_stylesheet_directory_uri(),
         'uri.template'   => get_template_directory_uri(),
     ];
-    $viewPaths = collect(preg_replace('%[\/]?(templates)?[\/.]*?$%', '', [STYLESHEETPATH, TEMPLATEPATH]))
+    $viewPaths = collect(preg_replace('%[\/]?(resources/views)?[\/.]*?$%', '', [STYLESHEETPATH, TEMPLATEPATH]))
         ->flatMap(function ($path) {
-            return ["{$path}/templates", $path];
+            return ["{$path}/resources/views", $path];
         })->unique()->toArray();
+
+        // die(var_dump($viewPaths));
     config([
-        'assets.manifest' => "{$paths['dir.stylesheet']}/dist/assets.json",
+        'assets.manifest' => "{$paths['dir.stylesheet']}/../dist/assets.json",
         'assets.uri'      => "{$paths['uri.stylesheet']}/dist",
         'view.compiled'   => "{$paths['dir.upload']}/cache/compiled",
         'view.namespaces' => ['App' => WP_CONTENT_DIR],
@@ -166,7 +168,7 @@ add_action('after_setup_theme', function () {
      * Create @asset() Blade directive
      */
     sage('blade')->compiler()->directive('asset', function ($asset) {
-        return '<?= App\\asset_path(\''.trim($asset, '\'"').'\'); ?>';
+        return "<?= App\\asset_path({$asset}); ?>";
     });
 });
 

@@ -71,7 +71,7 @@ class PostCreateProject
               'author_uri'  => $io->ask('<info>Theme Author URI [<comment>'.$theme_headers_default['author_uri'].'</comment>]:</info> ', $theme_headers_default['author_uri'])
             ];
 
-            file_put_contents('style.css', str_replace($theme_headers_default, $theme_headers, file_get_contents('style.css')));
+            file_put_contents('resources/style.css', str_replace($theme_headers_default, $theme_headers, file_get_contents('resources/style.css')));
         }
     }
 
@@ -82,7 +82,7 @@ class PostCreateProject
         if ($io->isInteractive()) {
             $io->write('<info>Configure build settings. Press enter key for default.</info>');
 
-            $current_settings = json_decode(file_get_contents('assets/config.json'));
+            $current_settings = json_decode(file_get_contents('resources/assets/config.json'));
 
             $browsersync_settings_default = [
                 'publicPath'  => $current_settings->publicPath,
@@ -94,8 +94,8 @@ class PostCreateProject
                 'devUrl'      => $io->ask('<info>Local development URL of WP site [<comment>'.$browsersync_settings_default['devUrl'].'</comment>]:</info> ', $browsersync_settings_default['devUrl'])
             ];
 
-            file_put_contents('assets/config.json', str_replace('/app/themes/sage', $browsersync_settings['publicPath'], file_get_contents('assets/config.json')));
-            file_put_contents('assets/config.json', str_replace($browsersync_settings_default['devUrl'], $browsersync_settings['devUrl'], file_get_contents('assets/config.json')));
+            file_put_contents('resources/assets/config.json', str_replace('/app/themes/sage', $browsersync_settings['publicPath'], file_get_contents('resources/assets/config.json')));
+            file_put_contents('resources/assets/config.json', str_replace($browsersync_settings_default['devUrl'], $browsersync_settings['devUrl'], file_get_contents('resources/assets/config.json')));
         }
     }
     // @codingStandardsIgnoreEnd

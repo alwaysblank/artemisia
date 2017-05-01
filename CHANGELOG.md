@@ -2,6 +2,9 @@ Changelog for Sage official can be found here: [github.com/roots/sage/](https://
 
 This changelog represents my changes made only to the Artemisia fork.
 
+### May 1st, 2017
+ - Updated to parity with murmurcreative/sage 9.0.0-beta.3
+
 ### February 28th, 2017
  - Preload footer scripts
  - Remove Bootstrap, Foundation
