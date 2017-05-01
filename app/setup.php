@@ -12,7 +12,7 @@ use Roots\Sage\Template\BladeProvider;
  * Theme assets
  */
 add_action('wp_enqueue_scripts', function () {
-    wp_enqueue_style('sage/main.css', asset_path('styles/main.css'), false, null);
+    wp_enqueue_style('artemesia/preload/sage/main.css', asset_path('styles/main.css'), false, null);
     wp_enqueue_script('artemesia/preload/sage/main.js', asset_path('scripts/main.js'), ['jquery'], null, true);
 }, 100);
 
@@ -78,16 +78,34 @@ add_action('after_setup_theme', function () {
 }, 20);
 
 /**
- * Prints out a preload link in the header for all scripts enqueued
- * for the footer.
+ * Preloads any scripts that we have asked to preload
  */
 add_action('wp_head', function() {
     foreach (wp_scripts()->registered as $handle => $script) :
         if(strpos($handle, 'artemesia/preload') === 0) :
-            printf('<link rel="preload" href="%s">', apply_filters('script_loader_src', $script->src));
+            printf('<link rel="preload" href="%s" as="script">', apply_filters('script_loader_src', $script->src));
         endif;
     endforeach;
 });
+
+/**
+ * Preloads any styles that we have asked to preload
+ */
+add_filter('style_loader_tag', function($html, $handle, $href, $media) {
+    if(strpos($handle, 'artemesia/preload') === 0) :
+        $GLOBALS['is_preloading_styles'] = 'yes';
+        return sprintf('<link rel="preload" href="%1$s" as="style" type="text/css" onload="this.rel=\'stylesheet\'" media="%2$s">%3$s<noscript><link rel="stylesheet" href="%1$s"></noscript>', apply_filters('style_loader_src', $href, $handle), $media, PHP_EOL);
+    endif;
+    return $html;
+}, 10, 4);
+
+add_action('wp_head', function() {
+    if($GLOBALS['is_preloading_styles'] === 'yes') :
+        $loadCSS = '!function(a){"use strict";var b=function(b,c,d){function j(a){if(e.body)return a();setTimeout(function(){j(a)})}function l(){f.addEventListener&&f.removeEventListener("load",l),f.media=d||"all"}var g,e=a.document,f=e.createElement("link");if(c)g=c;else{var h=(e.body||e.getElementsByTagName("head")[0]).childNodes;g=h[h.length-1]}var i=e.styleSheets;f.rel="stylesheet",f.href=b,f.media="only x",j(function(){g.parentNode.insertBefore(f,c?g:g.nextSibling)});var k=function(a){for(var b=f.href,c=i.length;c--;)if(i[c].href===b)return a();setTimeout(function(){k(a)})};return f.addEventListener&&f.addEventListener("load",l),f.onloadcssdefined=k,k(l),f};"undefined"!=typeof exports?exports.loadCSS=b:a.loadCSS=b}("undefined"!=typeof global?global:this);';
+        $preloadPolyfill = '!function(a){if(a.loadCSS){var b=loadCSS.relpreload={};if(b.support=function(){try{return a.document.createElement("link").relList.supports("preload")}catch(a){return!1}},b.poly=function(){for(var b=a.document.getElementsByTagName("link"),c=0;c<b.length;c++){var d=b[c];"preload"===d.rel&&"style"===d.getAttribute("as")&&(a.loadCSS(d.href,d,d.getAttribute("media")),d.rel=null)}},!b.support()){b.poly();var c=a.setInterval(b.poly,300);a.addEventListener&&a.addEventListener("load",function(){b.poly(),a.clearInterval(c)}),a.attachEvent&&a.attachEvent("onload",function(){a.clearInterval(c)})}}}(this);';
+        printf('<!-- Start loadCSS scripts -->%2$s<script type="text/javascript" charset="utf-8">%1$s%2$s%3$s</script>%2$s<!-- End loadCSS scripts -->', $loadCSS, PHP_EOL, $preloadPolyfill);
+    endif;
+}, 99);
 
 /**
  * Register sidebars

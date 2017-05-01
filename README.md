@@ -7,6 +7,7 @@ Artemisia is a fork of [Sage](https://roots.io/sage) that slims things down a bi
  * PostCSS processing
  * Automated optional package installation
  * Performance enhancements
+    * Optional preload of enqueued CSS/JS
 
 ### Recommended extensions
 
@@ -65,6 +66,8 @@ Edit `app/setup.php` to enable or disable theme features, setup navigation menus
 * Update `resources/assets/config.json` settings:
   * `devUrl` should reflect your local development hostname
   * `publicPath` should reflect your WordPress folder structure (`/wp-content/themes/sage` for non-[Bedrock](https://roots.io/bedrock/) installs)
+* To preload enqueued CSS/JS assets, prepend `artemesia/preload/` to the handle name.
+  * `$GLOABLS['is_preloading_styles'] === 'yes'` returns true if CSS assets are being preloaded.
 
 ### Build commands
 
