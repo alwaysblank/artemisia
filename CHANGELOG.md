@@ -6,6 +6,7 @@ This changelog represents my changes made only to the Artemisia fork.
  - Updated to parity with murmurcreative/sage 9.0.0-beta.3
  - Improved css/js preloading system
   - This uses a combination of `<link rel='preload'>` as well as Filament Group's loadCSS technique
+ - Added image preloading system
 
 ### February 28th, 2017
  - Preload footer scripts
