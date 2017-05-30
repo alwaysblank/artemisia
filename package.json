@@ -68,6 +68,7 @@
   },
   "dependencies": {
     "bootstrap": "^4.0.0-alpha.6",
+    "eslint-plugin-compat": "^1.0.3",
     "jquery": "1.12.4 - 3",
     "stylelint-no-unsupported-browser-features": "^1.0.0"
   }
