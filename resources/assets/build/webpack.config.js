@@ -134,9 +134,7 @@ let webpackConfig = {
           cssImport,
           objectFit,
           nthAndroidChildFix,
-          cssNext({
-            browsers: config.browsers
-          })
+          cssNext()
         ],
       },
     }),
