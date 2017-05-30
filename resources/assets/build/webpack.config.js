@@ -5,6 +5,7 @@ const merge = require('webpack-merge');
 const autoprefixer = require('autoprefixer');
 const CleanPlugin = require('clean-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const StyleLintPlugin = require('stylelint-webpack-plugin');
 
 const CopyGlobsPlugin = require('copy-globs-webpack-plugin');
 const config = require('./config');
@@ -151,6 +152,7 @@ let webpackConfig = {
         eslint: { failOnWarning: false, failOnError: true },
       },
     }),
+    new StyleLintPlugin()
   ],
 };
 
