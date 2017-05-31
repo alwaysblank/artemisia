@@ -125,5 +125,9 @@
     "value-list-comma-space-after": "always-single-line",
     "value-list-comma-space-before": "never",
     "value-list-max-empty-lines": 0,
-  }
+    "plugin/no-unsupported-browser-features": [true, { "severity": "warning" }]
+  },
+  "plugins": [
+    "stylelint-no-unsupported-browser-features"
+  ],
 }

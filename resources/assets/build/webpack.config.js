@@ -150,6 +150,7 @@ let webpackConfig = {
         eslint: { failOnWarning: false, failOnError: true },
       },
     }),
+    new StyleLintPlugin()
   ],
 };
 
