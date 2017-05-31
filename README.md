@@ -5,6 +5,7 @@ Artemisia is a fork of [Sage](https://roots.io/sage) that slims things down a bi
 ## Features
 
  * PostCSS processing
+    * Runtime stylelint/eslint checks against your browserlist for unsupported technology
  * Automated optional package installation
  * Performance enhancements
     * Optional preload of enqueued CSS/JS
