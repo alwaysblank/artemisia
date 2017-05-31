@@ -17,6 +17,10 @@
       "url": "http://opensource.org/licenses/MIT"
     }
   ],
+  "browserslist": [
+    "last 2 versions",
+    "not ie < 11"
+  ],
   "scripts": {
     "build": "webpack --progress --config resources/assets/build/webpack.config.js",
     "build:production": "webpack --progress -p --config resources/assets/build/webpack.config.js",
@@ -30,7 +34,7 @@
     "node": ">= 6.9.4"
   },
   "devDependencies": {
-    "autoprefixer": "^6.7.7",
+    "autoprefixer": "^7.1.1",
     "browser-sync": "^2.18.8",
     "browsersync-webpack-plugin": "^0.5.3",
     "bs-html-injector": "^3.0.3",
@@ -53,6 +57,7 @@
     "rimraf": "^2.6.1",
     "sass-loader": "^6.0.3",
     "style-loader": "^0.16.0",
+    "stylelint-webpack-plugin": "^0.7.0",
     "url-loader": "^0.5.8",
     "webpack": "^2.4.1",
     "webpack-assets-manifest": "^0.6.2",
@@ -63,6 +68,8 @@
   },
   "dependencies": {
     "bootstrap": "^4.0.0-alpha.6",
-    "jquery": "1.12.4 - 3"
+    "eslint-plugin-compat": "^1.0.3",
+    "jquery": "1.12.4 - 3",
+    "stylelint-no-unsupported-browser-features": "^1.0.0"
   }
 }

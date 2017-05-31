@@ -23,6 +23,7 @@
   },
   "plugins": [
     "import",
+    "compat"
   ],
   "settings": {
     "import/core-modules": [],
@@ -38,6 +39,7 @@
       "imports": "always-multiline",
       "exports": "always-multiline",
       "functions": "ignore"
-    }]
+    }],
+    "compat/compat": 1
   }
 }
