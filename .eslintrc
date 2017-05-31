@@ -23,7 +23,7 @@
   },
   "plugins": [
     "import",
-    "compat"
+    "compat",
   ],
   "settings": {
     "import/core-modules": [],
