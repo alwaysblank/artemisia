@@ -16,6 +16,7 @@ const cssColor = require('postcss-color-function');
 const cssRGBAFallback = require('postcss-color-rgba-fallback');
 const cssFilters = require('pleeease-filters');
 const cssMultiNot = require('postcss-selector-not');
+const cssNormalize = require('postcss-normalize');
 
 const CleanPlugin = require('clean-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
@@ -143,6 +144,7 @@ let webpackConfig = {
         context: config.paths.assets,
         postcss: [
           cssImport,
+          cssNormalize,
           objectFit,
           nthAndroidChildFix,
           autoprefixer,

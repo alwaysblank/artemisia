@@ -87,6 +87,7 @@
     "postcss-custom-properties": "^6.0.1",
     "postcss-custom-selectors": "^4.0.1",
     "postcss-media-minmax": "^3.0.0",
+    "postcss-normalize": "^3.0.0",
     "postcss-selector-not": "^3.0.1",
     "stylelint-no-unsupported-browser-features": "^1.0.0"
   }
