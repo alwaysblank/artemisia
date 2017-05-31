@@ -4967,6 +4967,13 @@ postcss-normalize-url@^3.0.7:
     postcss "^5.0.14"
     postcss-value-parser "^3.2.3"
 
+postcss-normalize@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/postcss-normalize/-/postcss-normalize-3.0.0.tgz#f217eb2d0867db9f393458a8ee7aa07adbedaa55"
+  dependencies:
+    browserslist "^2.1.2"
+    postcss "^6.0.1"
+
 postcss-nth-child-fix@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/postcss-nth-child-fix/-/postcss-nth-child-fix-1.0.0.tgz#c151c3ef46986f4c6c3cf84bb01fb0bb7390666c"
