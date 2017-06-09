@@ -32,6 +32,10 @@
       "type": "vcs",
       "url": "git@bitbucket.org:murmurcreative/image-tools.git"
     },
+    "murmurcreative/mnemosyne": {
+      "type": "vcs",
+      "url": "git@bitbucket.org:murmurcreative/mnemosyne.git"
+    },
     "murmurcreative/use-fields": {
       "type": "vcs",
       "url": "git@bitbucket.org:murmurcreative/use-fields.git"
