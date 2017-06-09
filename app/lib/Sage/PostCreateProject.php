@@ -21,7 +21,8 @@ class PostCreateProject
                 'better-excerpt' => $io->ask('<info><options=bold>Better Excerpt</>  Helps make more flexible excerpts. (<comment>y/N</comment>)</info>'),
                 'cabinet' => $io->ask('<info><options=bold>Cabinet</>  A handy file wrapper post type, with pointers! (<comment>y/N</comment>)</info>'),
                 'image-tools' => $io->ask('<info><options=bold>Image Tools</>  A collection of simple tools for interfacing with WP\'s media library. (<comment>y/N</comment>)</info>'),
-                'use-fields' => $io->ask('<info><options=bold>Use Fields</>  Simplify your interactions with ACF. (<comment>y/N</comment>)</info>')
+                'use-fields' => $io->ask('<info><options=bold>Use Fields</>  Simplify your interactions with ACF. (<comment>y/N</comment>)</info>'),
+                'mnemosyne' => $io->ask('<info><options=bold>Mnemosyne</>  Easy defaults with dynamic overrides. (<comment>y/N</comment>)</info>')
             ];
 
             $repositories = json_decode(file_get_contents('composer.json'))->repositories;
