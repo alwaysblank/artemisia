@@ -2,8 +2,9 @@
 
 // Import npm dependencies
 @import "~bootstrap/scss/bootstrap";
+
+// Import theme styles
 @import "common/global";
-@import "common/typography";
 @import "components/buttons";
 @import "components/comments";
 @import "components/forms";
