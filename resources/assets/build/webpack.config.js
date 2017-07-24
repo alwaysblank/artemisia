@@ -170,7 +170,10 @@ let webpackConfig = {
         eslint: { failOnWarning: false, failOnError: true },
       },
     }),
-    new StyleLintPlugin()
+    new StyleLintPlugin({
+      failOnError: ! config.enabled.watcher,
+      syntax: 'scss',
+    }),
   ],
 };
 
