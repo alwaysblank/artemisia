@@ -10,6 +10,20 @@ module.exports = ({ file, options }) => {
     plugins: {
       cssnano: options.enabled.optimize ? cssnanoConfig : false,
       autoprefixer: true,
+      'postcss-import': {},
+      'postcss-object-fit-images': {},
+      'postcss-nth-child-fix': {},
+      'autoprefixer': {},
+      'postcss-custom-properties': {},
+      'postcss-calc': {},
+      'postcss-custom-media': {},
+      'postcss-media-minmax': {},
+      'postcss-custom-selectors': {},
+      'postcss-color-function': {},
+      'postcss-color-rgba-fallback': {},
+      'pleeease-filters': {},
+      'postcss-selector-not': {},
+      'postcss-normalize': {},
     },
   };
 };

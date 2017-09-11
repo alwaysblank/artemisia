@@ -2,22 +2,6 @@
 
 const webpack = require('webpack');
 const merge = require('webpack-merge');
-
-const cssImport = require('postcss-import');
-const objectFit = require('postcss-object-fit-images');
-const nthAndroidChildFix = require('postcss-nth-child-fix');
-const autoprefixer = require('autoprefixer');
-const cssCustomProperties = require('postcss-custom-properties');
-const cssCalc = require('postcss-calc');
-const cssCustomMediaQueries = require('postcss-custom-media');
-const cssMediaMinmax = require('postcss-media-minmax');
-const cssCustomSelectors = require('postcss-custom-selectors');
-const cssColor = require('postcss-color-function');
-const cssRGBAFallback = require('postcss-color-rgba-fallback');
-const cssFilters = require('pleeease-filters');
-const cssMultiNot = require('postcss-selector-not');
-const cssNormalize = require('postcss-normalize');
-
 const CleanPlugin = require('clean-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const StyleLintPlugin = require('stylelint-webpack-plugin');
@@ -164,29 +148,6 @@ let webpackConfig = {
       minimize: config.enabled.optimize,
       debug: config.enabled.watcher,
       stats: { colors: true },
-    }),
-    new webpack.LoaderOptionsPlugin({
-      test: /\.css$/,
-      options: {
-        output: { path: config.paths.dist },
-        context: config.paths.assets,
-        postcss: [
-          cssImport,
-          cssNormalize,
-          objectFit,
-          nthAndroidChildFix,
-          autoprefixer,
-          cssCustomProperties,
-          cssCalc,
-          cssCustomMediaQueries,
-          cssMediaMinmax,
-          cssCustomSelectors,
-          cssColor,
-          cssRGBAFallback,
-          cssFilters,
-          cssMultiNot
-        ],
-      },
     }),
     new StyleLintPlugin({
       files: ['**/*.css'],
