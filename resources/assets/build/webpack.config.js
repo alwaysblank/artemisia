@@ -21,12 +21,12 @@ const cssNormalize = require('postcss-normalize');
 const CleanPlugin = require('clean-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const StyleLintPlugin = require('stylelint-webpack-plugin');
-
 const CopyGlobsPlugin = require('copy-globs-webpack-plugin');
+const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
+
 const config = require('./config');
 
 const assetsFilenames = (config.enabled.cacheBusting) ? config.cacheBusting : '[name]';
-const sourceMapQueryStr = (config.enabled.sourceMaps) ? '+sourceMap' : '-sourceMap';
 
 let webpackConfig = {
   context: config.paths.assets,
@@ -37,29 +37,56 @@ let webpackConfig = {
     publicPath: config.publicPath,
     filename: `scripts/${assetsFilenames}.js`,
   },
+  stats: {
+    hash: false,
+    version: false,
+    timings: false,
+    children: false,
+    errors: false,
+    errorDetails: false,
+    warnings: false,
+    chunks: false,
+    modules: false,
+    reasons: false,
+    source: false,
+    publicPath: false,
+  },
   module: {
     rules: [
       {
         enforce: 'pre',
-        test: /\.js?$/,
+        test: /\.js$/,
         include: config.paths.assets,
         use: 'eslint',
       },
       {
+        enforce: 'pre',
+        test: /\.(js|s?[ca]ss)$/,
+        include: config.paths.assets,
+        loader: 'import-glob',
+      },
+      {
         test: /\.js$/,
         exclude: [/(node_modules|bower_components)(?![/|\\](bootstrap|foundation-sites))/],
-        loader: 'buble',
-        options: { objectAssign: 'Object.assign' },
+        use: [
+          { loader: 'cache' },
+          { loader: 'buble', options: { objectAssign: 'Object.assign' } },
+        ],
       },
       {
         test: /\.css$/,
         include: config.paths.assets,
         use: ExtractTextPlugin.extract({
           fallback: 'style',
-          publicPath: '../',
           use: [
-            `css?${sourceMapQueryStr}`,
-            'postcss',
+            { loader: 'cache' },
+            { loader: 'css', options: { sourceMap: config.enabled.sourceMaps } },
+            {
+              loader: 'postcss', options: {
+                config: { path: __dirname, ctx: config },
+                sourceMap: config.enabled.sourceMaps,
+              },
+            },
           ],
         }),
       },
@@ -76,17 +103,18 @@ let webpackConfig = {
         include: config.paths.assets,
         loader: 'url',
         options: {
-          limit: 10000,
-          mimetype: 'application/font-woff',
+          limit: 4096,
           name: `[path]${assetsFilenames}.[ext]`,
         },
       },
       {
-        test: /\.(ttf|eot|woff2?|png|jpe?g|gif|svg)$/,
+        test: /\.(ttf|eot|woff2?|png|jpe?g|gif|svg|ico)$/,
         include: /node_modules|bower_components/,
-        loader: 'file',
+        loader: 'url',
         options: {
-          name: `vendor/${config.cacheBusting}.[ext]`,
+          limit: 4096,
+          outputPath: 'vendor/',
+          name: `${config.cacheBusting}.[ext]`,
         },
       },
     ],
@@ -170,10 +198,7 @@ let webpackConfig = {
         eslint: { failOnWarning: false, failOnError: true },
       },
     }),
-    new StyleLintPlugin({
-      failOnError: ! config.enabled.watcher,
-      syntax: 'scss',
-    }),
+    new FriendlyErrorsWebpackPlugin(),
   ],
 };
 
