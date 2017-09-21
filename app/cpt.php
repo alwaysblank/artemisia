@@ -5,11 +5,9 @@ namespace App;
 /**
  * Flush rewrite rules
  */
-function do_flush_rewrite_rules()
-{
+add_action('after_switch_theme', function () {
     flush_rewrite_rules();
-}
-add_action('after_switch_theme', 'App\\do_flush_rewrite_rules');
+});
 
 /**
  * bulk custom post types
@@ -34,8 +32,8 @@ add_action('after_switch_theme', 'App\\do_flush_rewrite_rules');
  * 'hierarchical'    - true/false whether the taxonomy is hierarchical
  */
 
-function custom_post_types()
-{
+
+add_action('init', function () {
     $cpt_list = array(
     'custom_post_type' => array (
       'single'         => 'Custom Type',
@@ -148,6 +146,4 @@ function custom_post_types()
             register_taxonomy($ct, $cpt, $args);
         endforeach;
     endif;
-}
-
-add_action('init', 'App\\custom_post_types');
+});
