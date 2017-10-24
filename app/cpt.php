@@ -5,10 +5,9 @@ namespace App;
 /**
  * Flush rewrite rules
  */
-function do_flush_rewrite_rules() {
-	flush_rewrite_rules();
-}
-add_action( 'after_switch_theme', 'App\\do_flush_rewrite_rules' );
+add_action('after_switch_theme', function () {
+    flush_rewrite_rules();
+});
 
 /**
  * bulk custom post types
@@ -33,8 +32,9 @@ add_action( 'after_switch_theme', 'App\\do_flush_rewrite_rules' );
  * 'hierarchical'    - true/false whether the taxonomy is hierarchical
  */
 
-function custom_post_types() {
-  $cpt_list = array(
+
+add_action('init', function () {
+    $cpt_list = array(
     'custom_post_type' => array (
       'single'         => 'Custom Type',
       'plural'         => 'Custom Types',
@@ -47,109 +47,103 @@ function custom_post_types() {
       'single'         => 'Default Type',
       'plural'         => 'Default Types'
     )
-  );
+    );
 
   // custom taxonomy
-  $ct_list = array(
+    $ct_list = array(
     'taxonomy' => array (
       'post_type' => 'custom_post_type',
       'single'    => 'Taxonomy',
       'plural'    => 'Taxonomies',
       'slug'      => 'my-taxonomy',
     )
-  );
+    );
 
 
-  if( !empty($cpt_list) ) :
-    foreach( $cpt_list as $cpt => $data) :
+    if (!empty($cpt_list)) :
+        foreach ($cpt_list as $cpt => $data) :
+            # Null coalescing operators
+            $single          = $data['single']          ?? 'Post Type';
+            $plural          = $data['plural']          ?? 'Post Types';
+            $slug            = $data['slug']            ?? $cpt;
+            $icon            = $data['icon']            ?? 'dashicons-book';
+            $position        = $data['position']        ?? 20;
+            $supports        = $data['supports']        ?? array('title','editor','thumbnail');
+            $exclude_search  = $data['exclude_search']  ?? false;
+            $hierarchical    = $data['hierarchical']    ?? false;
+            $capability_type = $data['capability_type'] ?? 'post';
 
-      # Null coalescing operators
-      $single          = $data['single']          ?? 'Post Type';
-      $plural          = $data['plural']          ?? 'Post Types';
-      $slug            = $data['slug']            ?? $cpt;
-      $icon            = $data['icon']            ?? 'dashicons-book';
-      $position        = $data['position']        ?? 20;
-      $supports        = $data['supports']        ?? array('title','editor','thumbnail');
-      $exclude_search  = $data['exclude_search']  ?? false;
-      $hierarchical    = $data['hierarchical']    ?? false;
-      $capability_type = $data['capability_type'] ?? 'post';
+            $labels = array(
+            'name'               => _x($plural, 'post type general name'),
+            'singular_name'      => _x($single, 'post type singular name'),
+            'add_new'            => _x('Add New', $single),
+            'add_new_item'       => __('Add New ' . $single),
+            'edit_item'          => __('Edit ' . $single),
+            'new_item'           => __('New ' . $single),
+            'view_item'          => __('View ' . $single),
+            'search_items'       => __('Search ' . $plural),
+            'not_found'          => __('No ' . $plural . ' found'),
+            'not_found_in_trash' => __('No ' . $plural . ' found in Trash'),
+            'parent_item_colon'  => ''
+            );
 
-      $labels = array(
-        'name'               => _x($plural, 'post type general name'),
-        'singular_name'      => _x($single, 'post type singular name'),
-        'add_new'            => _x('Add New', $single),
-        'add_new_item'       => __('Add New ' . $single),
-        'edit_item'          => __('Edit ' . $single),
-        'new_item'           => __('New ' . $single),
-        'view_item'          => __('View ' . $single),
-        'search_items'       => __('Search ' . $plural),
-        'not_found'          => __('No ' . $plural . ' found'),
-        'not_found_in_trash' => __('No ' . $plural . ' found in Trash'),
-        'parent_item_colon'  => ''
-      );
+            $args = array(
+              'labels'              => $labels,
+              'public'              => true,
+              'publicly_queryable'  => true,
+              'exclude_from_search' => $exclude_search,
+              'show_ui'             => true,
+              'query_var'           => true,
+              'rewrite'             => array( 'slug' => $slug ),
+              'capability_type'     => $capability_type,
+              'hierarchical'        => $hierarchical,
+              'has_archive'         => true,
+              'menu_icon'           => $icon,
+              'menu_position'       => $position,
+              'supports'            => $supports
+            );
 
-      $args = array(
-        'labels'              => $labels,
-        'public'              => true,
-        'publicly_queryable'  => true,
-        'exclude_from_search' => $exclude_search,
-        'show_ui'             => true,
-        'query_var'           => true,
-        'rewrite'             => array( 'slug' => $slug ),
-        'capability_type'     => $capability_type,
-        'hierarchical'        => $hierarchical,
-        'has_archive'         => true,
-        'menu_icon'           => $icon,
-        'menu_position'       => $position,
-        'supports'            => $supports
-      );
+            register_post_type($cpt, $args);
+        endforeach;
+    endif;
 
-      register_post_type($cpt, $args);
+    if (!empty($ct_list)) :
+        foreach ($ct_list as $ct => $data) :
+            # Null coalescing operators
+            $cpt          = $data['post_type']    ?? 'post';
+            $single       = $data['single']       ?? 'Taxonomy';
+            $plural       = $data['plural']       ?? 'Taxonomies';
+            $slug         = $data['slug']         ?? $ct;
+            $hierarchical = $data['hierarchical'] ?? true;
 
-    endforeach;
-  endif;
+            // Add new taxonomy, make it hierarchical (like categories)
+            $labels = array(
+            'name'              => _x($plural, 'taxonomy general name'),
+            'singular_name'     => _x($single, 'taxonomy singular name'),
+            'search_items'      => __('Search ' . $plural),
+            'all_items'         => __('All ' . $plural),
+            'parent_item'       => __('Parent ' . $single),
+            'parent_item_colon' => __('Parent ' . $single . ':'),
+            'edit_item'         => __('Edit ' . $single),
+            'update_item'       => __('Update ' . $single),
+            'add_new_item'      => __('Add New ' . $single),
+            'new_item_name'     => __('New ' . $single . ' Name'),
+            'menu_name'         => __($plural),
+            );
 
-  if( !empty($ct_list) ) :
-    foreach( $ct_list as $ct => $data) :
+            $args = array(
+              'hierarchical'      => $hierarchical,
+              'labels'            => $labels,
+              'show_ui'           => true,
+              'show_admin_column' => true,
+              'query_var'         => true,
+              'rewrite'           => array(
+              'slug'       => $slug,
+              'with_front' => true,
+            ),
+            );
 
-      # Null coalescing operators
-      $cpt          = $data['post_type']    ?? 'post';
-      $single       = $data['single']       ?? 'Taxonomy';
-      $plural       = $data['plural']       ?? 'Taxonomies';
-      $slug         = $data['slug']         ?? $ct;
-      $hierarchical = $data['hierarchical'] ?? true;
-
-      // Add new taxonomy, make it hierarchical (like categories)
-      $labels = array(
-        'name'              => _x( $plural, 'taxonomy general name' ),
-        'singular_name'     => _x( $single, 'taxonomy singular name' ),
-        'search_items'      => __( 'Search ' . $plural ),
-        'all_items'         => __( 'All ' . $plural ),
-        'parent_item'       => __( 'Parent ' . $single ),
-        'parent_item_colon' => __( 'Parent ' . $single . ':' ),
-        'edit_item'         => __( 'Edit ' . $single ),
-        'update_item'       => __( 'Update ' . $single ),
-        'add_new_item'      => __( 'Add New ' . $single ),
-        'new_item_name'     => __( 'New ' . $single . ' Name' ),
-        'menu_name'         => __( $plural ),
-      );
-
-      $args = array(
-        'hierarchical'      => $hierarchical,
-        'labels'            => $labels,
-        'show_ui'           => true,
-        'show_admin_column' => true,
-        'query_var'         => true,
-        'rewrite'           => array(
-          'slug'       => $slug,
-          'with_front' => true,
-        ),
-      );
-
-      register_taxonomy($ct, $cpt, $args);
-
-    endforeach;
-  endif;
-}
-
-add_action( 'init', 'App\\custom_post_types');
+            register_taxonomy($ct, $cpt, $args);
+        endforeach;
+    endif;
+});
