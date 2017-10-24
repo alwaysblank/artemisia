@@ -141,8 +141,6 @@ let webpackConfig = {
       $: 'jquery',
       jQuery: 'jquery',
       'window.jQuery': 'jquery',
-      Tether: 'tether',
-      'window.Tether': 'tether',
     }),
     new webpack.LoaderOptionsPlugin({
       minimize: config.enabled.optimize,
