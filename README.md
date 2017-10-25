@@ -4,26 +4,17 @@ Artemisia is a fork of [Sage](https://roots.io/sage) that slims things down a bi
 
 ## Features
 
- * PostCSS processing
-    * Runtime stylelint/eslint checks against your browserlist for unsupported technology
- * Automated optional package installation
- * Performance enhancements
-    * Optional preload of enqueued CSS/JS
-    * Optional preload system for image
- * Sass for stylesheets
- * ES6 for JavaScript
- * [Webpack](https://webpack.github.io/) for compiling assets, optimizing images, and concatenating and minifying files
- * [Browsersync](http://www.browsersync.io/) for synchronized browser testing
- * [Laravel Blade](https://laravel.com/docs/5.3/blade) as a templating engine
- * [Controller](https://github.com/soberwp/controller) for passing data to Blade templates
- * CSS framework options:
-  * [Bootstrap 4](http://getbootstrap.com/)
-  * [Foundation](http://foundation.zurb.com/)
-  * [Tachyons](http://tachyons.io/)
-  * None (blank slate)
- * Font Awesome (optional)
-
-See a working example at [roots-example-project.com](https://roots-example-project.com/).
+* PostCSS processing
+  * Runtime stylelint/eslint checks against your browserlist for unsupported technology
+* Automated optional package installation
+* Performance enhancements
+  * Optional preload of enqueued CSS/JS
+  * Optional preload system for image
+* ES6 for JavaScript
+* [Webpack](https://webpack.github.io/) for compiling assets, optimizing images, and concatenating and minifying files
+* [Browsersync](http://www.browsersync.io/) for synchronized browser testing
+* [Laravel Blade](https://laravel.com/docs/5.3/blade) as a templating engine
+* [Controller](https://github.com/soberwp/controller) for passing data to Blade templates
 
 ## Requirements
 
