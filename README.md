@@ -1,4 +1,4 @@
-# [Artemisia](https://bitbucket.org/benspants/artemisia/)
+# [Artemisia](https://bitbucket.org/benspants/artemisia/) 🌿
 
 Artemisia is a fork of [Sage](https://roots.io/sage) that slims things down a bit.
 
