@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "a70f6b546dd6f6d0400a2deb37f6df2a",
+    "content-hash": "f7eafd675cf2c1f76ec2b360e9eb2cae",
     "packages": [
         {
             "name": "brain/hierarchy",
@@ -1219,6 +1219,156 @@
             "description": "Symfony Yaml Component",
             "homepage": "https://symfony.com",
             "time": "2017-10-05T14:43:42+00:00"
+        },
+        {
+            "name": "zenodorus/arrays",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/zenodorus-tools/arrays.git",
+                "reference": "fde312406ceaf86bda5519d1e8911c1afb031d54"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/zenodorus-tools/arrays/zipball/fde312406ceaf86bda5519d1e8911c1afb031d54",
+                "reference": "fde312406ceaf86bda5519d1e8911c1afb031d54",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^6.4",
+                "squizlabs/php_codesniffer": "^3.1",
+                "zenodorus/core": "dev-master"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Zenodorus\\": "src"
+                }
+            },
+            "scripts": {
+                "check": [
+                    "phpcs --standard=vendor/zenodorus/core/phpcs.xml src tests"
+                ],
+                "fix": [
+                    "phpcbf --standard=vendor/zenodorus/core/phpcs.xml src tests"
+                ],
+                "test": [
+                    "phpunit"
+                ]
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Ben Martinez-Bateman",
+                    "email": "ben@alwaysblank.org",
+                    "homepage": "https://alwaysblank.org"
+                }
+            ],
+            "description": "Tools for messing with arrays.",
+            "homepage": "https://zenodor.us",
+            "support": {
+                "source": "https://github.com/zenodorus-tools/arrays/tree/master",
+                "issues": "https://github.com/zenodorus-tools/arrays/issues"
+            },
+            "time": "2017-10-25T18:09:23+00:00"
+        },
+        {
+            "name": "zenodorus/core",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/zenodorus-tools/core.git",
+                "reference": "b95dd99d3b22fedd12136693f1fe3f2c35f32564"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/zenodorus-tools/core/zipball/b95dd99d3b22fedd12136693f1fe3f2c35f32564",
+                "reference": "b95dd99d3b22fedd12136693f1fe3f2c35f32564",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Zenodorus\\": "src"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Ben Martinez-Bateman",
+                    "email": "ben@alwaysblank.org"
+                }
+            ],
+            "description": "A collection of all the Zenodorus utilities.",
+            "support": {
+                "source": "https://github.com/zenodorus-tools/core/tree/master",
+                "issues": "https://github.com/zenodorus-tools/core/issues"
+            },
+            "time": "2017-10-25T17:07:50+00:00"
+        },
+        {
+            "name": "zenodorus/strings",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/zenodorus-tools/strings.git",
+                "reference": "c9a7b9b62870390ab95e5929b4ec65669fce09ae"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/zenodorus-tools/strings/zipball/c9a7b9b62870390ab95e5929b4ec65669fce09ae",
+                "reference": "c9a7b9b62870390ab95e5929b4ec65669fce09ae",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^6.4",
+                "squizlabs/php_codesniffer": "^3.1",
+                "zenodorus/core": "dev-master"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Zenodorus\\": "src"
+                }
+            },
+            "scripts": {
+                "check": [
+                    "phpcs --standard=vendor/zenodorus/core/phpcs.xml src tests"
+                ],
+                "fix": [
+                    "phpcbf --standard=vendor/zenodorus/core/phpcs.xml src tests"
+                ],
+                "test": [
+                    "phpunit"
+                ]
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Ben Martinez-Bateman",
+                    "email": "ben@alwaysblank.org",
+                    "homepage": "https://alwaysblank.org"
+                }
+            ],
+            "description": "Tools for messing with strings.",
+            "homepage": "https://zenodor.us",
+            "support": {
+                "source": "https://github.com/zenodorus-tools/strings/tree/master",
+                "issues": "https://github.com/zenodorus-tools/strings/issues"
+            },
+            "time": "2017-10-25T18:07:55+00:00"
         }
     ],
     "packages-dev": [
@@ -1531,7 +1681,10 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "roots/sage-lib": 10,
-        "soberwp/controller": 10
+        "soberwp/controller": 10,
+        "zenodorus/core": 20,
+        "zenodorus/strings": 20,
+        "zenodorus/arrays": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
