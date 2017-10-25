@@ -4,6 +4,9 @@
       "./scripts/main.js",
       "./styles/main.css"
     ],
+    "critical" : [
+      "./styles/common/_index.css"
+    ],
     "customizer": [
       "./scripts/customizer.js"
     ]
