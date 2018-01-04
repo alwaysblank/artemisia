@@ -1,4 +1,18 @@
 ### HEAD
+* Update to Bootstrap 4 Beta 2 ([#1981](https://github.com/roots/sage/pull/1981))
+* Add friendly-errors-webpack-plugin ([#1961](https://github.com/roots/sage/pull/1961))
+* Update to Controller 9.0.0-beta.4 ([#1959](https://github.com/roots/sage/pull/1959))
+* Change default Controller path to `app/controllers/` ([#1954](https://github.com/roots/sage/pull/1954))
+* Fix `lint:styles` task with cmd.exe ([#1955](https://github.com/roots/sage/pull/1955))
+* Ensure template filenames are without path and extension ([#1941](https://github.com/roots/sage/pull/1941))
+* Moved `title()` helper to `app.php` controller ([#1912](https://github.com/roots/sage/pull/1912))
+* Fix `lint:styles` script not matching files in deep subdirectories ([#1951](https://github.com/roots/sage/pull/1951))
+* Fix for plugins that don't enqueue their scripts properly ([#1949](https://github.com/roots/sage/pull/1949))
+* Fix Popper for Bootstrap 4 ([#1946](https://github.com/roots/sage/pull/1946))
+
+### 9.0.0-beta.4: August 11th, 2017
+* Update to Bootstrap 4.0.0-beta ([#1943](https://github.com/roots/sage/pull/1943))
+* PHP 7+ is now required ([#1935](https://github.com/roots/sage/pull/1935))
 * Update dependencies, support `config-local.json`, implement autoload system for styles/scripts, use `roots/sage-installer`, use `roots/sage-lib` ([#1919](https://github.com/roots/sage/pull/1919))
 * Add soberwp/controller ([#1903](https://github.com/roots/sage/pull/1903))
 * Change syntax of template call to match other files in views ([#1908](https://github.com/roots/sage/pull/1908))
