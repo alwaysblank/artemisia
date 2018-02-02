@@ -1,29 +1,33 @@
 {
-  "name": "benspants/artemisia",
+  "name": "alwaysblank/artemisia",
   "type": "wordpress-theme",
   "license": "MIT",
-  "description": "Tweaked version of Murmur's fork of roots/sage.",
-  "homepage": "https://roots.io/sage/",
+  "description": "A slimmer, modified version of Sage.",
+  "homepage": "https://github.com/alwaysblank/artemisia/",
   "authors": [
     {
       "name": "Ben Martinez-Bateman",
       "email": "ben@murmurcreative.com",
-      "homepage": "https://alwaysblank.org"
+      "homepage": "https://alwaysblank.org",
+      "role": "Developer"
     },
     {
       "name": "Ben Word",
       "email": "ben@benword.com",
-      "homepage": "https://github.com/retlehs"
+      "homepage": "https://github.com/retlehs",
+      "role": "Upstream Developer"
     },
     {
       "name": "Scott Walkinshaw",
       "email": "scott.walkinshaw@gmail.com",
-      "homepage": "https://github.com/swalkinshaw"
+      "homepage": "https://github.com/swalkinshaw",
+      "role": "Upstream Developer"
     },
     {
       "name": "QWp6t",
       "email": "hi@qwp6t.me",
-      "homepage": "https://github.com/qwp6t"
+      "homepage": "https://github.com/qwp6t",
+      "role": "Upstream Developer"
     }
   ],
   "keywords": [
@@ -35,26 +39,6 @@
     }
   },
   "repositories" : {
-    "murmurcreative/better-excerpt": {
-      "type": "vcs",
-      "url": "git@bitbucket.org:murmurcreative/better-excerpt.git"
-    },
-    "murmurcreative/cabinet": {
-      "type": "vcs",
-      "url": "git@bitbucket.org:murmurcreative/cabinet.git"
-    },
-    "murmurcreative/image-tools": {
-      "type": "vcs",
-      "url": "git@bitbucket.org:murmurcreative/image-tools.git"
-    },
-    "alwaysblank/mnemosyne": {
-      "type": "vcs",
-      "url": "https://github.com/alwaysblank/mnemosyne.git"
-    },
-    "murmurcreative/use-fields": {
-      "type": "vcs",
-      "url": "git@bitbucket.org:murmurcreative/use-fields.git"
-    },
     "zenodorus/core": {
       "type": "vcs",
       "url": "https://github.com/zenodorus-tools/core.git"
