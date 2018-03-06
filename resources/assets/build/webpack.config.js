@@ -51,7 +51,7 @@ let webpackConfig = {
       },
       {
         test: /\.js$/,
-        exclude: [/(node_modules|bower_components)(?![/|\\](bootstrap|foundation-sites))/],
+        exclude: [/node_modules(?![/|\\](bootstrap|foundation-sites))/],
         use: [
           { loader: 'cache' },
           { loader: 'buble', options: { objectAssign: 'Object.assign' } },
@@ -93,7 +93,7 @@ let webpackConfig = {
       },
       {
         test: /\.(ttf|eot|woff2?|png|jpe?g|gif|svg|ico)$/,
-        include: /node_modules|bower_components/,
+        include: /node_modules/,
         loader: 'url',
         options: {
           limit: 4096,
@@ -107,7 +107,6 @@ let webpackConfig = {
     modules: [
       config.paths.assets,
       'node_modules',
-      'bower_components',
     ],
     enforceExtension: false,
   },
@@ -147,15 +146,14 @@ let webpackConfig = {
       debug: config.enabled.watcher,
       stats: { colors: true },
     }),
-    new StyleLintPlugin({
-      files: ['**/*.css'],
-      context: config.paths.assets
-    }),
     new webpack.LoaderOptionsPlugin({
       test: /\.js$/,
       options: {
         eslint: { failOnWarning: false, failOnError: true },
       },
+    }),
+    new StyleLintPlugin({
+      failOnError: !config.enabled.watcher,
     }),
     new FriendlyErrorsWebpackPlugin(),
   ],

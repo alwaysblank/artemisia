@@ -1,15 +1,15 @@
 {
   "name": "artemisia",
-  "version": "0.9-beta.4",
-  "author": "Ben Martinez-Bateman <ben@murmurcreative.com>",
-  "homepage": "https://bitbucket.org/benspants/artemisia/",
+  "version": "2.0.0",
+  "author": "Ben Martinez-Bateman <ben@alwaysblank.org>",
+  "homepage": "https://github.com/alwaysblank/artemisia",
   "private": true,
   "repository": {
     "type": "git",
-    "url": "git@bitbucket.org:benspants/artemisia.git"
+    "url": "https://github.com/alwaysblank/artemisia.git"
   },
   "bugs": {
-    "url": "https://bitbucket.org/benspants/artemisia/issues"
+    "url": "https://github.com/alwaysblank/artemisia/issues"
   },
   "licenses": [
     {
@@ -21,56 +21,32 @@
     "last 2 versions",
     "not ie < 11"
   ],
-  "eslintConfig": {
-    "root": true,
-    "extends": "eslint:recommended",
-    "globals": {
-      "wp": true
-    },
-    "env": {
-      "node": true,
-      "es6": true,
-      "amd": true,
-      "browser": true,
-      "jquery": true
-    },
-    "parserOptions": {
-      "ecmaFeatures": {
-        "globalReturn": true,
-        "generators": false,
-        "objectLiteralDuplicateProperties": false,
-        "experimentalObjectRestSpread": true
-      },
-      "ecmaVersion": 2017,
-      "sourceType": "module"
-    },
-    "plugins": [
-      "import"
-    ],
-    "settings": {
-      "import/core-modules": [],
-      "import/ignore": [
-        "node_modules",
-        "\\.(coffee|scss|css|less|hbs|svg|json)$"
-      ]
-    },
-    "rules": {
-      "comma-dangle": [
-        "error",
-        {
-          "arrays": "always-multiline",
-          "objects": "always-multiline",
-          "imports": "always-multiline",
-          "exports": "always-multiline",
-          "functions": "ignore"
-        }
-      ]
-    }
-  },
   "stylelint": {
     "extends": "stylelint-config-standard",
     "rules": {
-      "no-empty-source": null
+      "no-empty-source": null,
+      "at-rule-no-unknown": [
+        true,
+        {
+          "ignoreAtRules": [
+            "extend",
+            "at-root",
+            "debug",
+            "warn",
+            "error",
+            "if",
+            "else",
+            "for",
+            "each",
+            "while",
+            "mixin",
+            "include",
+            "content",
+            "return",
+            "function"
+          ]
+        }
+      ]
     }
   },
   "scripts": {
@@ -81,31 +57,31 @@
     "rmdist": "rimraf dist",
     "lint": "npm run -s lint:scripts && npm run -s lint:styles",
     "lint:scripts": "eslint resources/assets/scripts resources/assets/build",
-    "lint:styles": "stylelint resources/assets/styles/**/*.{css,sass,scss,sss,less}",
+    "lint:styles": "stylelint \"resources/assets/styles/**/*.{css,sass,scss,sss,less}\"",
     "test": "npm run -s lint"
   },
   "engines": {
     "node": ">= 6.9.4"
   },
   "devDependencies": {
-    "autoprefixer": "~7.1",
-    "browser-sync": "~2.18",
+    "autoprefixer": "~7.2.5",
+    "browser-sync": "~2.23.6",
     "browsersync-webpack-plugin": "^0.6.0",
     "bs-html-injector": "~3.0",
     "buble-loader": "^0.4.1",
-    "cache-loader": "~1.1",
-    "clean-webpack-plugin": "^0.1.16",
+    "cache-loader": "~1.2.0",
+    "clean-webpack-plugin": "^0.1.18",
     "copy-globs-webpack-plugin": "^0.2.0",
-    "css-loader": "^0.28.4",
-    "cssnano": "~4.0.0-rc.1",
-    "eslint": "~4.9",
+    "css-loader": "^0.28.9",
+    "cssnano": "~4.0.0-rc.2",
+    "eslint": "~4.17.0",
     "eslint-loader": "~1.9",
     "eslint-plugin-compat": "^2.0",
     "eslint-plugin-import": "~2.8",
-    "extract-text-webpack-plugin": "~3.0",
-    "file-loader": "^1.1",
-    "imagemin-mozjpeg": "~6.0",
-    "imagemin-webpack-plugin": "~1.5.0-beta.0",
+    "extract-text-webpack-plugin": "~3.0.2",
+    "file-loader": "^1.1.6",
+    "imagemin-mozjpeg": "~7.0",
+    "imagemin-webpack-plugin": "~2.0.0",
     "import-glob": "~1.5",
     "minimist": "^1.2.0",
     "pleeease-filters": "^4.0.0",
@@ -117,7 +93,7 @@
     "postcss-custom-properties": "^6.0.1",
     "postcss-custom-selectors": "^4.0.1",
     "postcss-import": "^11.0",
-    "postcss-loader": "~2.0",
+    "postcss-loader": "~2.1.0",
     "postcss-media-minmax": "^3.0.0",
     "postcss-normalize": "^4.0.0",
     "postcss-nth-child-fix": "^2.0.0",
@@ -125,23 +101,23 @@
     "postcss-safe-parser": "~3.0",
     "postcss-selector-not": "^3.0.1",
     "qs": "^6.3.0",
-    "resolve-url-loader": "~2.1",
+    "resolve-url-loader": "~2.2.1",
     "rimraf": "~2.6",
-    "style-loader": "^0.19.0",
-    "stylelint": "~8.2",
-    "stylelint-config-standard": "~17.0",
+    "style-loader": "^0.20.1",
+    "stylelint": "~8.4.0",
+    "stylelint-config-standard": "~18.0.0",
     "stylelint-no-unsupported-browser-features": "^1.0.0",
-    "stylelint-webpack-plugin": "^0.9.0",
-    "url-loader": "^0.6",
-    "webpack": "~3.8",
+    "stylelint-webpack-plugin": "^0.10.1",
+    "url-loader": "^0.6.2",
+    "webpack": "~3.10.0",
     "webpack-assets-manifest": "^1.0",
-    "webpack-dev-middleware": "~1.12",
-    "webpack-hot-middleware": "~2.20",
+    "webpack-dev-middleware": "~2.0.4",
+    "webpack-hot-middleware": "~2.21.0",
     "webpack-merge": "~4.1",
-    "yargs": "~10.0"
+    "yargs": "~11.0",
+    "friendly-errors-webpack-plugin": "^1.6.1"
   },
   "dependencies": {
-    "friendly-errors-webpack-plugin": "^1.6.1",
     "jquery": "1.12.4 - 3"
   }
 }
