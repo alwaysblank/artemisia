@@ -6,6 +6,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 This changelog represents my changes made only to the Artemisia fork. Changelog for Sage official can be found here: [github.com/roots/sage/](https://github.com/roots/sage/)
 
+## [9.0.0] - 2018-03-05
+
+### Changed
+
+- Updated to parity wtih roots/sage 9.0.0
+- Updated all `package.json` dependencies.
+
 ## [9.0.0-beta.4] - 2017-10-24
 
 ### Changed
