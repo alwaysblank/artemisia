@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "6ffa622d682364d71a7054530f73b626",
+    "content-hash": "8961d54cdc7b6ec31cbe6509bd45b515",
     "packages": [
         {
             "name": "brain/hierarchy",
@@ -248,63 +248,6 @@
                 "string"
             ],
             "time": "2018-01-09T20:05:19+00:00"
-        },
-        {
-            "name": "hassankhan/config",
-            "version": "0.10.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/hassankhan/config.git",
-                "reference": "06ac500348af033f1a2e44dc357ca86282626d4a"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/hassankhan/config/zipball/06ac500348af033f1a2e44dc357ca86282626d4a",
-                "reference": "06ac500348af033f1a2e44dc357ca86282626d4a",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "~4.0",
-                "scrutinizer/ocular": "~1.1",
-                "squizlabs/php_codesniffer": "~2.2"
-            },
-            "suggest": {
-                "symfony/yaml": "~2.5"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Noodlehaus\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Hassan Khan",
-                    "homepage": "http://hassankhan.me/",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Lightweight configuration file loader that supports PHP, INI, XML, JSON, and YAML files",
-            "homepage": "http://hassankhan.me/config/",
-            "keywords": [
-                "config",
-                "configuration",
-                "ini",
-                "json",
-                "microphp",
-                "unframework",
-                "xml",
-                "yaml",
-                "yml"
-            ],
-            "time": "2016-02-11T16:21:17+00:00"
         },
         {
             "name": "illuminate/config",
@@ -890,22 +833,21 @@
         },
         {
             "name": "soberwp/controller",
-            "version": "9.0.0-beta.4",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/soberwp/controller.git",
-                "reference": "2b6c8450f4a3100b16bfc482c825d89422b6adc6"
+                "reference": "fdc469267f47668dc44a32aef36f07ecbfb647a1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/soberwp/controller/zipball/2b6c8450f4a3100b16bfc482c825d89422b6adc6",
-                "reference": "2b6c8450f4a3100b16bfc482c825d89422b6adc6",
+                "url": "https://api.github.com/repos/soberwp/controller/zipball/fdc469267f47668dc44a32aef36f07ecbfb647a1",
+                "reference": "fdc469267f47668dc44a32aef36f07ecbfb647a1",
                 "shasum": ""
             },
             "require": {
                 "brain/hierarchy": "^2.3",
                 "composer/installers": "~1.0",
-                "hassankhan/config": "^0.10.0",
                 "php": ">=5.6.0",
                 "symfony/yaml": "^3.2"
             },
@@ -938,7 +880,7 @@
             "keywords": [
                 "wordpress"
             ],
-            "time": "2017-08-22T17:35:30+00:00"
+            "time": "2018-02-21T19:28:13+00:00"
         },
         {
             "name": "symfony/debug",
@@ -1655,7 +1597,7 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "roots/sage-lib": 10,
-        "soberwp/controller": 10,
+        "soberwp/controller": 20,
         "zenodorus/strings": 20,
         "zenodorus/arrays": 20
     },
