@@ -6,13 +6,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 This changelog represents my changes made only to the Artemisia fork. Changelog for Sage official can be found here: [github.com/roots/sage/](https://github.com/roots/sage/)
 
-
 ## [9.0.5] - 2018-11-12
 
-###Changed
+### Changed
 
-- Udpated to partity w/ roots/sage 9.0.5
+- Updated to partity w/ roots/sage 9.0.5
 - Incorporate Acorn stuff
+- Rolls back some Artemisia changes (i.e. no SCSS/SASS, asset pre-loading) for the time being
+  - Eventually I intended to put these back in, but in a different fasion (i.e. Service Workers for asset pre-loading instead of cookies)
 
 ## [9.0.0] - 2018-03-05
 
