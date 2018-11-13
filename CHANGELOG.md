@@ -1,6 +1,11 @@
 Changelog for Sage official can be found here: [github.com/roots/sage/](https://github.com/roots/sage/)
+=======
 
 This changelog represents my changes made only to the Artemisia fork.
+
+### November 12, 2018
+
+- Udpated to partity w/ roots/sage 9.0.5
 
 ### September 11, 2017
 

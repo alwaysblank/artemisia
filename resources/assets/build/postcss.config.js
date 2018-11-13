@@ -8,7 +8,6 @@ module.exports = ({ file, options }) => {
   return {
     parser: options.enabled.optimize ? 'postcss-safe-parser' : undefined,
     plugins: {
-      cssnano: options.enabled.optimize ? cssnanoConfig : false,
       autoprefixer: true,
       'postcss-import': {},
       'postcss-object-fit-images': {},
@@ -24,6 +23,7 @@ module.exports = ({ file, options }) => {
       'pleeease-filters': {},
       'postcss-selector-not': {},
       'postcss-normalize': {},
+      cssnano: options.enabled.optimize ? cssnanoConfig : false,
     },
   };
 };

@@ -52,7 +52,7 @@ function config($key = null, $default = null)
  */
 function template($file, $data = [])
 {
-    if (remove_action('wp_head', 'wp_enqueue_scripts', 1)) {
+    if (!is_admin() && remove_action('wp_head', 'wp_enqueue_scripts', 1)) {
         wp_enqueue_scripts();
     }
 
@@ -109,10 +109,12 @@ function filter_templates($templates)
                     return [
                         "{$path}/{$template}.blade.php",
                         "{$path}/{$template}.php",
-                        "{$template}.blade.php",
-                        "{$template}.php",
                     ];
-                });
+                })
+                ->concat([
+                    "{$template}.blade.php",
+                    "{$template}.php",
+                ]);
         })
         ->filter()
         ->unique()
@@ -137,4 +139,29 @@ function display_sidebar()
     static $display;
     isset($display) || $display = apply_filters('sage/display_sidebar', false);
     return $display;
+}
+
+/**
+ * Gets the title for whatever we're looking at.
+ *
+ * @return string
+ */
+function title()
+{
+    if (is_home()) {
+        if ($home = get_option('page_for_posts', true)) {
+            return get_the_title($home);
+        }
+        return __('Latest Posts', 'sage');
+    }
+    if (is_archive()) {
+        return get_the_archive_title();
+    }
+    if (is_search()) {
+        return sprintf(__('Search Results for %s', 'sage'), get_search_query());
+    }
+    if (is_404()) {
+        return __('Not Found', 'sage');
+    }
+    return get_the_title();
 }
