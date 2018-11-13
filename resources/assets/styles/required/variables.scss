@@ -1,0 +1,104 @@
+/* stylelint-disable indentation */
+/* stylelint-disable block-no-empty */
+/* stylelint-disable comment-empty-line-before */
+
+/* Variables */
+
+/* Sizes */
+
+  $size: 1rem;
+
+  /* (these sizes are based on the Golden Ratio) */
+  $size-bwww: $size * 0.236;
+  $size-bww: $size * 0.382;
+  $size-bw: $size * 0.618;
+  $size-b: $size;
+  $size-bm: $size * 1.618;
+  $size-bmm: $size * 2.618;
+  $size-bmmm: $size * 4.236;
+  $size-bmmmm: $size * 6.854;
+
+  /* These provide some intermediate values */
+  $size-bwwu: ((0.236 + 0.382) / 2) * $size-b;
+  $size-bwu: ((0.382 + 0.618) / 2) * $size-b;
+  $size-bu: ((0.618 + 1) / 2) * $size-b;
+  $size-bn: ((1 + 1.618) / 2) * $size-b;
+  $size-bmn: ((1.618 + 2.618) / 2) * $size-b;
+  $size-bmmn: ((2.618 + 4.236) / 2) * $size-b;
+  $size-bmmmn: ((4.236 + 6.854) / 2) * $size-b;
+
+/* Type */
+
+  /* Face */
+  $type-face-headline: serif;
+  $type-face-body: sans-serif;
+
+  /* Size */
+  /* This essentially replicates the "size" definitions,
+    but is split out here in case we need to separate
+    type size from spacing size. */
+  $type-size-bwww: $size-bwww;
+  $type-size-bwwu: $size-bwwu;
+  $type-size-bww: $size-bww;
+  $type-size-bwu: $size-bwu;
+  $type-size-bw: $size-bw;
+  $type-size-bu: $size-bu;
+  $type-size-b: $size-b;
+  $type-size-bn: $size-bn;
+  $type-size-bm: $size-bm;
+  $type-size-bmn: $size-bmn;
+  $type-size-bmm: $size-bmm;
+  $type-size-bmmn: $size-bmmn;
+  $type-size-bmmm: $size-bmmm;
+  $type-size-bmmmu: $size-bmmmn;
+  $type-size-bmmmm: $size-bmmmm;
+
+/* Position */
+
+  /* Layers */
+  $z--core: -20;
+  $z--mantle: -10;
+  $z-crust: 0;
+  $z-surface: 10;
+  $z-atmosphere: 20;
+  $z-orbit: 30;
+
+/* Colors */
+
+  /* Primary : Murmur Gold */
+  $color-gold-hex: #ba803c;
+  $color-gold-h: 32;
+  $color-gold-s: 51%;
+  $color-gold-l: 48%;
+  $color-gold: hsl($color-gold-h, $color-gold-s, $color-gold-l);
+  $color-primary: $color-gold;
+
+  /* Secondary : Murmur Brown */
+  $color-brown-hex: #241f1c;
+  $color-brown-h: 23;
+  $color-brown-s: 13%;
+  $color-brown-l: 13%;
+  $color-brown: hsl($color-brown-h, $color-brown-s, $color-brown-l);
+  $color-secondary: $color-brown;
+
+  /* Accent : Murmur Gray */
+  $color-gray-hex: #f4f2ef;
+  $color-gray-h: 36;
+  $color-gray-s: 19%;
+  $color-gray-l: 95%;
+  $color-gray: hsl($color-gray-h, $color-gray-s, $color-gray-l);
+  $color-accent: $color-gray;
+
+  /* Black */
+  /* This assigns a separate value for "black" elements, i.e.
+      body text, etc, that is different from actual black. */
+  $color-black-hex: $color-brown-hex;
+  $color-black-h: $color-brown-h;
+  $color-black-s: $color-brown-s;
+  $color-black-l: $color-brown-l;
+  $color-black: hsl($color-black-h, $color-black-s, $color-black-l);
+
+/* Speed */
+  $speed-fast: 0.15s;
+  $speed-normal: 0.3s;
+  $speed-slow: 0.6s;

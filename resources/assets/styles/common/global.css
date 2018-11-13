@@ -9,5 +9,5 @@ html {
 }
 
 body {
-  padding: var(--size-bm);
+  padding: $size-bm;
 }

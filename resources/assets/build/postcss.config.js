@@ -1,29 +1,26 @@
 /* eslint-disable */
+const cleancss = require('postcss-clean');
+const postcssPresetEnv = require('postcss-preset-env');
 
-const cssnanoConfig = {
-  preset: ['default', { discardComments: { removeAll: true } }]
+const cleancssConfig = {
+  level: {
+    1: {
+      all: true,
+      specialComments: 0
+    },
+    2: {
+      all: false,
+      removeDuplicateRules: true
+    }
+  }
 };
 
 module.exports = ({ file, options }) => {
   return {
     parser: options.enabled.optimize ? 'postcss-safe-parser' : undefined,
-    plugins: {
-      autoprefixer: true,
-      'postcss-import': {},
-      'postcss-object-fit-images': {},
-      'postcss-nth-child-fix': {},
-      'autoprefixer': {},
-      'postcss-custom-properties': {},
-      'postcss-calc': {},
-      'postcss-custom-media': {},
-      'postcss-media-minmax': {},
-      'postcss-custom-selectors': {},
-      'postcss-color-function': {},
-      'postcss-color-rgba-fallback': {},
-      'pleeease-filters': {},
-      'postcss-selector-not': {},
-      'postcss-normalize': {},
-      cssnano: options.enabled.optimize ? cssnanoConfig : false,
-    },
+    plugins: [
+      postcssPresetEnv(),
+      cleancss(options.enabled.optimize ? cleancssConfig : false)
+    ]
   };
 };
