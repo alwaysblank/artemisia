@@ -2,10 +2,8 @@
 
 namespace App;
 
-use Roots\Sage\Container;
-use Roots\Sage\Assets\JsonManifest;
-use Roots\Sage\Template\Blade;
-use Roots\Sage\Template\BladeProvider;
+use function Roots\asset;
+use function Roots\view;
 
 /**
  * Theme assets
@@ -41,30 +39,22 @@ add_action('wp_enqueue_scripts', function () {
 }, 100);
 
 add_action('wp_enqueue_scripts', function () {
-    wp_enqueue_style(
-        'artemesia/preload/sage/main.css',
-        asset_path('styles/main.css'),
-        false,
-        null
-    );
+    wp_enqueue_script('sage/vendor', asset('scripts/vendor.js'), ['jquery'], null, true);
+    wp_enqueue_script('sage/main', asset('scripts/main.js'), ['sage/vendor', 'jquery'], null, true);
 
-    /* Load this if CSS is not cached, because that means
-       we're preloading CSS and we want to avoid style pop.
-    */
-    if (!isset($_COOKIE['CSS_CACHED'])) {
-        wp_add_inline_style(
-            'artemesia/preload/sage/main.css',
-            file_get_contents(locate_asset('styles/critical.css'))
-        );
+    wp_add_inline_script('sage/vendor', asset('scripts/manifest.js')->contents(), 'before');
+
+    if (is_single() && comments_open() && get_option('thread_comments')) {
+        wp_enqueue_script('comment-reply');
     }
 
-    wp_enqueue_script(
-        'artemesia/preload/sage/main.js',
-        asset_path('scripts/main.js'),
-        ['jquery'],
-        null,
-        true
-    );
+    $styles = ['styles/main.css'];
+
+    foreach ($styles as $stylesheet) {
+        if (($asset = asset($stylesheet)->exists())) {
+            wp_enqueue_style('sage/'.basename($stylesheet, '.css'), asset($stylesheet)->uri(), false, null);
+        }
+    }
 }, 100);
 
 /**
@@ -119,7 +109,7 @@ add_action(
          * Use main stylesheet for visual editor
          * @see resources/assets/styles/layouts/_tinymce.scss
          */
-        add_editor_style(asset_path('styles/main.css'));
+        add_editor_style(asset('styles/admin.css')->uri());
 
         /**  
          * Remove WP emojis
@@ -127,25 +117,7 @@ add_action(
         remove_action('wp_head', 'print_emoji_detection_script', 7);
         remove_action('wp_print_styles', 'print_emoji_styles');
         add_filter('emoji_svg_url', '__return_false');
-    },
-    20
-);
-
-/**
- * Set a cookie so we can guess whether we've loaded
- * css or not.
- */
-add_action('init', function () {
-    $css_id = hash('md4', asset_path('styles/main.css'));
-    if (!isset($_COOKIE['CSS_CACHED'])) {
-        // If the cookie isn't set, set it.
-        setcookie('CSS_CACHED', $css_id, strtotime('+30 days'), '/');
-    } elseif ($_COOKIE['CSS_CACHED'] != $css_id) {
-        // If the cookie doesn't match our CSS, unset it.
-        setcookie('CSS_CACHED', $_COOKIE['CSS_CACHED'], 1, '/');
-        unset($_COOKIE['CSS_CACHED']);
-    }
-});
+}, 20);
 
 /**
  * Preloads any scripts that we have asked to
@@ -209,79 +181,16 @@ add_action('wp_footer', function () {
 add_action('widgets_init', function () {
     $config = [
         'before_widget' => '<section class="widget %1$s %2$s">',
-        'after_widget'  => '</section>',
-        'before_title'  => '<h3>',
-        'after_title'   => '</h3>'
+        'after_widget' => '</section>',
+        'before_title' => '<h3>',
+        'after_title' => '</h3>'
     ];
     register_sidebar([
-        'name'          => __('Primary', 'sage'),
-        'id'            => 'sidebar-primary'
+        'name' => __('Primary', 'sage'),
+        'id' => 'sidebar-primary'
     ] + $config);
     register_sidebar([
-        'name'          => __('Footer', 'sage'),
-        'id'            => 'sidebar-footer'
+        'name' => __('Footer', 'sage'),
+        'id' => 'sidebar-footer'
     ] + $config);
-});
-
-/**
- * Updates the `$post` variable on each iteration of the loop.
- * Note: updated value is only available for subsequently loaded views, such as partials
- */
-add_action('the_post', function ($post) {
-    sage('blade')->share('post', $post);
-});
-
-/**
- * Setup Sage options
- */
-add_action('after_setup_theme', function () {
-    /**
-     * Add JsonManifest to Sage container
-     */
-    sage()->singleton('sage.assets', function () {
-        return new JsonManifest(config('assets.manifest'), config('assets.uri'));
-    });
-
-    /**
-     * Add Blade to Sage container
-     */
-    sage()->singleton('sage.blade', function (Container $app) {
-        $cachePath = config('view.compiled');
-        if (!file_exists($cachePath)) {
-            wp_mkdir_p($cachePath);
-        }
-
-        (new BladeProvider($app))->register();
-        return new Blade($app['view']);
-    });
-
-    /**
-     * Create @asset() Blade directive
-     */
-    sage('blade')->compiler()->directive('asset', function ($asset) {
-        return "<?= " . __NAMESPACE__ . "\\asset_path({$asset}); ?>";
-    });
-
-    /**
-     * Create @inline() Blade directive
-     */
-    sage('blade')->compiler()->directive('inline', function ($asset) {
-        $asset = trim($asset, " '\"");
-        return "<?= file_get_contents(". __NAMESPACE__ . "\\locate_asset('" . $asset . "')); ?>";
-    });
-
-    /**
-     * Create @icon Blade directive
-     */
-    sage('blade')->compiler()->directive('icon', function ($asset) {
-        $asset = trim($asset, " '\"");
-        $asset = str_replace("'", "\"", $asset);
-        /**
-         * There isn't a good way to break up this string, so we're
-         * going to ignore standards for a bit.
-         */
-        // @codingStandardsIgnoreStart
-        return '<?php $asset = "' . $asset . '"; $true_asset = ' . __NAMESPACE__ . '\\locate_asset($asset); ?><span class="a-icon a-icon--<?= basename($asset, \'.svg\') ?>"><?= file_get_contents($true_asset); ?></span>';
-        // @codingStandardsIgnoreEnd
-    });
 });

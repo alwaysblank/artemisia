@@ -4,6 +4,33 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Assets Directory URI
+    |--------------------------------------------------------------------------
+    |
+    | The asset manifest contains relative paths to your assets. This URI will
+    | be prepended when using Sage's asset management system. Change this if
+    | you are pushing to a CDN.
+    |
+    */
+
+    'uri' => get_theme_file_uri('/dist'),
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | Assets Directory Path
+    |--------------------------------------------------------------------------
+    |
+    | The asset manifest contains relative paths to your assets. This path will
+    | be prepended when using Sage's asset management system.
+    |
+    */
+
+    'path' => get_theme_file_path('/dist'),
+
+
+    /*
+    |--------------------------------------------------------------------------
     | Assets Manifest
     |--------------------------------------------------------------------------
     |
@@ -14,30 +41,5 @@ return [
     |
     */
 
-    'manifest' => get_theme_file_path().'/dist/assets.json',
-
-    /*
-    |--------------------------------------------------------------------------
-    | Assets Path URI
-    |--------------------------------------------------------------------------
-    |
-    | The asset manifest contains relative paths to your assets. This URI will
-    | be prepended when using Sage's asset management system. Change this if
-    | you are using a CDN.
-    |
-    */
-
-    'uri' => get_theme_file_uri().'/dist',
-
-    /*
-    |--------------------------------------------------------------------------
-    | Assets Path
-    |--------------------------------------------------------------------------
-    |
-    | This is the abosolute path to assets--useful for things like inlining
-    | SVGs and the like.
-    |
-    */
-
-    'path' => get_theme_file_path().'/dist',
+    'manifest' => get_theme_file_path('/dist/assets.json'),
 ];
